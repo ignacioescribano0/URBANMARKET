@@ -1,13 +1,15 @@
 /*ESTRUCTURA BODY*/
 .xcontenedor_global {
     display: grid;
-    grid-template: 1fr 1fr 1fr 1fr 1fr 1fr / auto auto auto /*6 filas / 3 columnas */
+    grid-template: 1fr 1fr 1fr 1fr 1fr 1fr / auto auto auto; /*6 filas / 3 columnas */
     grid-template-areas: "header header header" 
                          "slider slider slider"
                          "oferta oferta oferta"
                          "banner banner banner"
                          "pago pago pago" 
                          "footer footer footer";
+
+
     gap: 1px;
 }
 
@@ -70,14 +72,7 @@
 }
 
 
-/* OFERTAS */
 
-h2 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 20px; 
-}
 
 
 

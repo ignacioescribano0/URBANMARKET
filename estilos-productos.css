@@ -1,0 +1,16 @@
+
+.contenedor_global {
+    display: grid;
+    grid-template: 1fr 1fr 1fr / auto; /*6 filas / 3 columnas */
+    grid-template-areas: "header" 
+                         "prueba"
+                         "footer";
+
+
+    gap: 1px;
+}
+
+.header    { grid-area: header;}
+.prueba    {grid-area: prueba}
+.footer    { grid-area: footer;}
+/* CONTACTO */

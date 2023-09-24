@@ -10,11 +10,20 @@
   }
 
 
-
 h2 {
-    color: #304E9D;
-    font-size: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px; 
+  color: #304E9D;
+  font-size: 2em;
 }
+
+
+h3 {
+  color: #DE7D39;
+}
+
 
 .contenido{
     padding: 60px;
