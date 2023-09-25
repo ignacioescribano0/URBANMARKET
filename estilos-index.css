@@ -1,0 +1,151 @@
+/*ESTRUCTURA BODY*/
+.xcontenedor_global {
+    display: grid;
+    grid-template: 1fr 1fr 1fr 1fr 1fr 1fr / auto auto auto; /*6 filas / 3 columnas */
+    grid-template-areas: "header header header" 
+                         "slider slider slider"
+                         "oferta oferta oferta"
+                         "banner banner banner"
+                         "pago pago pago" 
+                         "footer footer footer";
+
+
+    gap: 1px;
+}
+
+.header    { grid-area: header;}
+.contenedor_slider    { grid-area: slider; }
+.contenedor_ofertas   { grid-area: ofertas;}
+.banner    { grid-area: banner;    background-color: bisque;}
+.pagos     { grid-area: pagos;    background-color: bisque;}
+.footer    { grid-area: footer;}
+
+
+/* SLIDER */
+
+.contenedor_slider {
+    margin-top: 20px; /* Antes era 200 por el position:fixed del header*/
+    /*margin-left: -10px; Aca estamos teniendo un problema 1¿porque en negativo? 2 intente poner un amrgin left y no lo toma */
+    display: grid;
+    place-content: center;
+    max-width: 1250px;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+    object-fit: cover;
+    padding:6px;
+}
+
+.slider{
+  width: 100%;
+  max-width: 1200px;
+  height: auto;
+  overflow: hidden; /* No esta funcionando porque no puedo definir tamaños porque las imagenes se ponene encima delmenu del texto y el footer */
+  border-radius: 20px;
+}
+
+.slider ul {
+    display: flex;
+    padding: 0px;
+    width: 400%;
+    animation: slide 15s infinite cubic-bezier(0.55, 0.48, 0.37, 0.92);
+    }
+
+.slider li img {
+  width: 100%; 
+  height: auto; 
+  object-fit: cover; /* Con esto ajusto la imagen manteniendo su  aspecto y cubriendo el contenedor */
+}
+
+@keyframes slide {
+    0%{margin-left:0;}
+    20%{margin-left:0;}
+
+    25%{margin-left:-100%;}
+    45%{margin-left:-100%;}
+
+    50%{margin-left: -200%;}
+    70%{margin-left: -200%;}
+
+    75%{margin-left:-300%;}
+    100%{margin-left:-300%;}
+}
+
+
+
+
+
+
+.contenedor_ofertas {
+    margin-top: 20px;
+   max-width: 1250px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;   
+    place-content: center;
+    display: flex;
+}
+
+
+.ofertas{
+  width: 100%;
+  border-radius: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px;
+  
+
+}
+
+
+
+.ofertas img {
+   width:100%;
+   border-radius: 8px;
+}
+
+.ofertas_vencimiento{  
+    text-align: center;
+    
+    padding-top: 20px;
+}
+
+@media (max-width:1100px){
+    h2{
+        padding: 8px 40px;
+        text-align: center;
+    }
+
+    .contenedor_ofertas{
+        margin-top: 50px;
+ 
+    }
+
+    .ofertas{
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+         justify-content: center;
+        align-items: center; 
+        margin-bottom: 50px;
+        gap: 30px;
+     }
+
+       .ofertas div{ 
+         display: grid;
+         justify-items: center;
+
+         align-items: center; 
+
+     }
+
+    .ofertas_vencimiento{
+        padding: 8px 40px;
+        text-align: center;
+    }
+    .ofertas img {
+        width:50%;
+    }
+   
+
+}
+
