@@ -3,7 +3,7 @@
     display: grid;
     grid-template: 1fr 1fr 1fr / auto; /*6 filas / 3 columnas */
     grid-template-areas: "header" 
-                         "prueba"
+                         "seccion"
                          "footer";
 
 
@@ -11,6 +11,5 @@
 }
 
 .header    { grid-area: header;}
-.prueba    {grid-area: prueba}
+.contenedor_seccion    {grid-area: seccion}
 .footer    { grid-area: footer;}
-/* CONTACTO */
