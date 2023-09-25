@@ -1,12 +1,12 @@
 /*ESTRUCTURA BODY*/
-.xcontenedor_global {
+.contenedor_global {
     display: grid;
-    grid-template: 1fr 1fr 1fr 1fr 1fr 1fr / auto auto auto; /*6 filas / 3 columnas */
+    grid-template: 0.4fr 1.3fr 1.2fr 0.5fr 0.5fr 0.6fr / auto auto auto; /*6 filas / 3 columnas */
     grid-template-areas: "header header header" 
                          "slider slider slider"
-                         "oferta oferta oferta"
+                         "ofertas ofertas ofertas"
                          "banner banner banner"
-                         "pago pago pago" 
+                         "pagos pagos pagos" 
                          "footer footer footer";
 
 
@@ -83,20 +83,19 @@
     margin-right: auto;
     width: 100%;   
     place-content: center;
-    display: flex;
+    display: grid;
 }
 
 
 .ofertas{
   width: 100%;
   border-radius: 20px;
-  display: grid;
+  display: flex;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 30px;
   
 
 }
-
 
 
 .ofertas img {
