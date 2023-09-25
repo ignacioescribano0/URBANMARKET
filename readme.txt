@@ -1,4 +1,4 @@
-EN EL ULTIMO COMMIT A MAIN (ESTRUCTURA BASE 4) quedo armada la siguiente estructura:
+EN EL ULTIMO COMMIT A MAIN (ESTRUCTURA GENERAL 1) quedo armada la siguiente estructura:
 
 index.html
 nosotros.html
@@ -37,3 +37,9 @@ Pero aún queda mucho por hacer
 - A su vez hay bugs a arreglar , hacer que las cosas bien responsive, optimiza codigo , etc
 
 - y muchas mas cosas que no me acuerdo.  La verdad que el trabajo de Pablo ha sido excelente y solo por eso la pagina se ve como se , además ha escrito la gran mayoría del codigo también. Muchas Gracias, tenemos mucha suerte de tenerte en nuestro grupo.
+
+Publique el sitio en github pages dado que es otra de las tareas del proyecto, se puede ver en:
+
+https://ignacioescribano0.github.io/URBANMARKET/index.html
+
+y deberia ir actualizando dinamicamente a medida que trabajos en el proyecto. Ahi pueden ver como va quedando. Al entregar el trabajo tengo que pasarle ese link al profesor.
