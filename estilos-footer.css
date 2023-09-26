@@ -152,9 +152,8 @@ footer .contenedor_footer .seccion_footer p{
 /* FOOTER RESPONSIVE */
 
 @media (max-width:991px){
-    footer{
-        padding: 40px;
-    }
+   
+
     footer .contenedor_footer{
         grid-template-columns: repeat(2, 1fr);
 
