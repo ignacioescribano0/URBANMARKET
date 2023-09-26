@@ -1,0 +1,88 @@
+
+.contenedor_global {
+    display: grid;
+    
+    grid-template: 0.5fr 0.5 2fr 1fr 1fr / auto auto auto; /*6 filas / 3 columnas */
+    grid-template-areas: "header header header" 
+                         "contacto contacto contacto"
+                         "form form form"
+                         "mapa mapa mapa" 
+                         "footer footer footer";
+
+
+    gap: 1px;
+}
+
+.header    {    grid-area: header;}
+.contenedor_contacto   { grid-area: contacto; padding-top: 20px;padding-bottom: 30px;}
+.formulario   { grid-area: form; }   /*background-color: bisque;*/
+.mapa {grid-area: mapa;}
+.footer    { grid-area: footer;}
+/* CONTACTO */
+
+
+.contenedor_formulario {
+    display: grid;
+    padding: 20px;
+    justify-content:space-around;
+   /* background-color: bisque;*/
+    grid-template: 0.3fr 0.3fr 0.3fr 1fr 0.3fr/ auto auto auto ;
+    grid-template-areas: "nombre dni correo"
+                         "telefono tarjeta tarjeta1"
+                         "asunto asunto asunto"
+                         "textA textA textA"
+                         "botoni botonc botond";
+   
+                
+}
+
+.contenedor_formulario div {padding: 20px;}
+.nombreFormulario  {    grid-area: nombre;}
+.dniFormulario  {    grid-area: dni;}
+.correoFormulario  {    grid-area: correo;}
+.telefonoFormulario  {    grid-area: telefono;}
+.tarjetaFormulario  {    grid-area: tarjeta;}
+.tarjeta1Formulario  {    grid-area: tarjeta1;}
+.asuntoFormulario {    grid-area: asunto;
+    text-align: center;}
+.textAFormulario  {    grid-area: textA; }
+
+.textAFormulario textarea {width:100%;}
+.botoniFormulario {grid-area:botoni;}
+.botoncFormulario {grid-area:botonc;}
+.botondFormulario {grid-area:botond;}
+#botonSubmit {width:100%;background-color: #304E9D; color:white;font-size: 100%;}
+#botonResetear {width:100%;background-color: #304E9D;color:white; font-size: 100%;}
+.info_contacto{
+        text-align: center; 
+}
+
+.fa-phone-square{
+    font-size: 22px;
+}
+
+/* CONTACTO_RESPONSIVE */
+
+@media (max-width:768px){
+   
+    .info_contacto{
+        text-align: center; 
+}
+   
+}
+
+.map-responsive{
+    overflow: hidden;
+    padding-bottom: 30%;
+    position: relative;
+    height: 0;
+
+}
+
+.map-responsive iframe {
+    left:0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
