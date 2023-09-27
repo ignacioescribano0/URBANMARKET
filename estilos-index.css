@@ -65,13 +65,14 @@
 }
 
 
-/* OFERTAS */
+
 
 
 .contenedor_ofertas {
+    /* Elimina display: grid y place-content: center; */
     max-width: 1250px;
-    margin: 20px auto; 
-    
+    margin: 20px auto; /* Esto centra el contenedor y proporciona un espacio superior de 20px */
+    /* ... (resto de tu estilo) */
 }
 
 
@@ -131,45 +132,45 @@
 }
 
 
-/* BANNER */
+ /* BANNER */
 
-        .banner {
-            position: relative;
-            width: 85%; 
-            margin: 0 auto; 
-            background-image: url('imagenes/banner.jpg'); 
-            background-size: cover;
-            background-position: center;
-            color: #fff;
-            text-align: center;
-            justify-content: center;    
-            align-items: center;
+ .banner {
+    position: relative;
+    width: 85%; 
+    margin: 0 auto; 
+    background-image: url('imagenes/banner1.jpg'); 
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    text-align: center;
+    justify-content: center;    
+    align-items: center;
 }
 
-        .contenido {
-            width: 100%;
-            margin: auto;
-            padding: 30px 0;
-            background-color: rgba(0, 0, 0, 0.6); 
-            border-radius: 10px;
-        }
+.contenido {
+    width: 100%;
+    margin: auto;
+    padding: 30px 0;
+    background-color: rgba(0, 0, 0, 0.6); 
+    border-radius: 10px;
+}
 
-        .titulo_banner {
-            font-size: 2em;
-            margin-bottom: 20px;
-        }
+.titulo_banner {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
 
-        .boton-contactar {
-            display: inline-block;
-            padding: 20px 30px;
-            font-size: 1em;
-            text-decoration: none;
-            background-color: #ff6600; 
-            color: #fff;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
+.boton-contactar {
+    display: inline-block;
+    padding: 20px 30px;
+    font-size: 1em;
+    text-decoration: none;
+    background-color: #ff6600; 
+    color: #fff;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
 
-        .boton-contactar:hover {
-            background-color: #e05100; 
-        }
+.boton-contactar:hover {
+    background-color: #e05100; 
+}
