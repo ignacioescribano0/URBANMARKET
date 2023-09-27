@@ -1,41 +1,34 @@
 /*ESTRUCTURA BODY*/
 .contenedor_global {
     display: grid;
-    grid-template: 0.4fr 1.3fr 1.2fr 0.5fr 0.5fr 0.6fr / auto auto auto; /*6 filas / 3 columnas */
-    grid-template-areas: "header header header" 
-                         "slider slider slider"
-                         "ofertas ofertas ofertas"
-                         "banner banner banner"
-                         "pagos pagos pagos" 
-                         "footer footer footer";
-
-
-    gap: 1px;
+    grid-template-columns: 1fr; /* Solo necesitamos una columna */
+    grid-template-rows: auto; /* Deja que las filas se ajusten automáticamente según el contenido */
+    grid-template-areas:
+        "header"
+        "contenedor_slider"
+        "contenedor_ofertas"
+        "banner"
+        "pagos"
+        "footer";
+    grid-gap: 20px; /* Espacio entre las secciones */
 }
 
-.header    { grid-area: header;}
-.contenedor_slider    { grid-area: slider; }
-.contenedor_ofertas   { grid-area: ofertas;}
-.banner    { grid-area: banner;    background-color: bisque;}
-.pagos     { grid-area: pagos;    background-color: bisque;}
-.footer    { grid-area: footer;}
+.header { grid-area: header; }
+.contenedor_slider { grid-area: contenedor_slider; }
+.contenedor_ofertas { grid-area: contenedor_ofertas; }
+.banner { grid-area: banner; }
+.pagos { grid-area: pagos; }
+.footer { grid-area: footer; }
 
 
 /* SLIDER */
 
 .contenedor_slider {
-    margin-top: 20px; /* Antes era 200 por el position:fixed del header*/
-    /*margin-left: -10px; Aca estamos teniendo un problema 1¿porque en negativo? 2 intente poner un amrgin left y no lo toma */
-    display: grid;
-    place-content: center;
+    /* Elimina display: grid y place-content: center; */
     max-width: 1250px;
-    margin-left: auto;
-    margin-right: auto;
-    height: auto;
-    object-fit: cover;
-    padding:6px;
+    margin: 20px auto; /* Esto centra el contenedor y proporciona un espacio superior de 20px */
+    /* ... (resto de tu estilo) */
 }
-
 .slider{
   width: 100%;
   max-width: 1200px;
@@ -72,18 +65,13 @@
 }
 
 
-
-
+/* OFERTAS */
 
 
 .contenedor_ofertas {
-    margin-top: 20px;
-   max-width: 1250px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;   
-    place-content: center;
-    display: grid;
+    max-width: 1250px;
+    margin: 20px auto; 
+    
 }
 
 
@@ -105,7 +93,6 @@
 
 .ofertas_vencimiento{  
     text-align: center;
-    
     padding-top: 20px;
 }
 
@@ -113,11 +100,6 @@
     h2{
         padding: 8px 40px;
         text-align: center;
-    }
-
-    .contenedor_ofertas{
-        margin-top: 50px;
- 
     }
 
     .ofertas{
@@ -148,3 +130,46 @@
 
 }
 
+
+/* BANNER */
+
+        .banner {
+            position: relative;
+            width: 85%; 
+            margin: 0 auto; 
+            background-image: url('imagenes/banner.jpg'); 
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            text-align: center;
+            justify-content: center;    
+            align-items: center;
+}
+
+        .contenido {
+            width: 100%;
+            margin: auto;
+            padding: 30px 0;
+            background-color: rgba(0, 0, 0, 0.6); 
+            border-radius: 10px;
+        }
+
+        .titulo_banner {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .boton-contactar {
+            display: inline-block;
+            padding: 20px 30px;
+            font-size: 1em;
+            text-decoration: none;
+            background-color: #ff6600; 
+            color: #fff;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .boton-contactar:hover {
+            background-color: #e05100; 
+        }
