@@ -1,21 +1,23 @@
 /*ESTRUCTURA BODY*/
 .contenedor_global {
     display: grid;
-    grid-template-columns: 1fr; /* Solo necesitamos una columna */
-    grid-template-rows: auto; /* Deja que las filas se ajusten automáticamente según el contenido */
+    grid-template-columns: 1fr; 
+    grid-template-rows: auto; 
     grid-template-areas:
         "header"
         "contenedor_slider"
         "contenedor_ofertas"
+        "contenedor_extra"
         "banner"
         "pagos"
         "footer";
-    grid-gap: 20px; /* Espacio entre las secciones */
+    grid-gap: 20px; 
 }
 
 .header { grid-area: header; }
 .contenedor_slider { grid-area: contenedor_slider; }
-.contenedor_ofertas { grid-area: contenedor_ofertas; }
+.contenedor_ofertas { grid-area: contenedor_ofertas;}
+.contenedor_extra { grid-area: contenedor_extra; }
 .banner { grid-area: banner; }
 .pagos { grid-area: pagos; }
 .footer { grid-area: footer; }
@@ -64,9 +66,7 @@
     100%{margin-left:-300%;}
 }
 
-
-
-
+/* OFERTAS */
 
 .contenedor_ofertas {
     /* Elimina display: grid y place-content: center; */
@@ -106,16 +106,15 @@
     .ofertas{
         display: grid;
         grid-template-columns: repeat(1, 1fr);
-         justify-content: center;
+        justify-content: center;
         align-items: center; 
         margin-bottom: 50px;
         gap: 30px;
      }
 
-       .ofertas div{ 
+        .ofertas div{ 
          display: grid;
          justify-items: center;
-
          align-items: center; 
 
      }
@@ -131,6 +130,49 @@
 
 }
 
+/* CONTENIDO EXTRA */
+
+    .contenedor_extra {
+        text-align: center; 
+        padding-bottom: 20px;
+    }
+
+    .extras {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px; 
+        justify-content: center; 
+    }
+
+    .extra_imagenes_derecha {
+        display: flex;
+        justify-content: left; 
+
+    }
+
+    .extra_imagenes_izquierda {
+        display: flex;
+        justify-content: right; 
+
+    }
+
+
+    @media (max-width: 1060px) {
+        .extras {
+            grid-template-columns: 1fr; 
+        }
+
+    .extra_imagenes_izquierda {
+        display: flex;
+        justify-content: center; 
+        }
+
+        .extra_imagenes_derecha {
+            display: flex;
+            justify-content:center; 
+        }
+
+    }
 
  /* BANNER */
 
@@ -145,6 +187,7 @@
     text-align: center;
     justify-content: center;    
     align-items: center;
+    margin-bottom: 3%;
 }
 
 .contenido {
@@ -173,4 +216,49 @@
 
 .boton-contactar:hover {
     background-color: #e05100; 
+}
+
+
+
+ /* PAGOS */
+
+.contenedor_pagos {
+    text-align: center; 
+}
+
+.pagos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px; 
+    justify-content: center; 
+}
+
+.pagos_imagenes_derecha {
+    display: flex;
+    justify-content: right; 
+
+}
+
+.pagos_imagenes_izquierda {
+    display: flex;
+    justify-content: left; 
+
+}
+
+
+@media (max-width: 1060px) {
+    .pagos {
+        grid-template-columns: 1fr; 
+    }
+
+.pagos_imagenes_izquierda {
+    display: flex;
+    justify-content: center; 
+    }
+
+    .pagos_imagenes_derecha {
+        display: flex;
+        justify-content:center; 
+    }
+
 }
