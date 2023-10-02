@@ -1,15 +1,116 @@
 
 .contenedor_global {
     display: grid;
-    grid-template: 1fr 1fr 1fr / auto; /*6 filas / 3 columnas */
+    grid-template-columns: 1fr;
+    grid-template-rows: auto; 
     grid-template-areas: "header" 
-                         "seccion"
+                        "contenedor_descuentos"
+                         "pagos"
                          "footer";
 
-
-    gap: 1px;
+    grid-gap: 20px; 
 }
 
 .header    { grid-area: header;}
-.contenedor_seccion    {grid-area: seccion}
+.contenedor_descuentos { grid-area: contenedor_descuentos;}
+.pagos { grid-area: pagos; }
 .footer    { grid-area: footer;}
+
+
+
+/* DESCUENTOS */
+
+.contenedor_descuentos {
+    /* Elimina display: grid y place-content: center; */
+    max-width: 1200px;
+    margin: 20px auto; /* Esto centra el contenedor y proporciona un espacio superior de 20px */
+    /* ... (resto de tu estilo) */
+}
+
+
+.descuentos{
+  width: 100%;
+  border-radius: 20px;
+  display: flex;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px;
+  
+
+}
+
+
+.descuentos img {
+   width:100%;
+   border-radius: 8px;
+}
+
+
+@media (max-width:1100px){
+
+    .descuentos{
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        justify-content: center;
+        align-items: center; 
+        margin-bottom: 50px;
+        gap: 30px;
+     }
+
+        .descuentos div{ 
+         display: grid;
+         justify-items: center;
+         align-items: center; 
+
+     }
+
+    .descuentos img {
+        width:50%;
+    }
+   
+
+}
+
+
+
+/* PAGOS */
+
+.contenedor_pagos {
+    text-align: center; 
+}
+
+.pagos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px; 
+    justify-content: center; 
+}
+
+.pagos_imagenes_derecha {
+    display: flex;
+    justify-content: right; 
+
+}
+
+.pagos_imagenes_izquierda {
+    display: flex;
+    justify-content: left; 
+
+}
+
+
+@media (max-width: 1060px) {
+    .pagos {
+        grid-template-columns: 1fr; 
+    }
+
+.pagos_imagenes_izquierda {
+    display: flex;
+    justify-content: center; 
+    }
+
+    .pagos_imagenes_derecha {
+        display: flex;
+        justify-content:center; 
+    }
+
+}
