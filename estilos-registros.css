@@ -1,0 +1,65 @@
+
+body  {
+ background: linear-gradient(to right,#0f1527, #304E9D,#1b409e );
+}
+
+    form  {
+        margin: 20vh auto 0 auto;
+        width: 800px;
+        background-color: whitesmoke;
+        border: 3px solid #DE7D39;
+        padding: 20px;
+        border-radius: 15px;
+    }
+    
+    form h1{
+        color: #304E9D;
+        text-align: center;
+    }
+
+    label {
+        text-align: left;
+        margin-bottom: 10px;
+    }
+    
+    input[type="text"], input[type="email"], input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        
+    }
+    
+ 
+    button {
+        background-color: #DE7D39;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        margin-top: 4px;
+        width: 100%;
+        cursor: pointer;
+        border-radius: 10px;
+    }
+
+    .input-control input:focus{
+        outline: 0;
+    }
+
+    .input-control.success input{
+        border-color:#09c372 ;
+    }
+    .input-control.error input{
+        border-color:#ff3860 ;
+    }
+
+    .input-control .error {
+        border-color:#ff3860 ;
+        font-size: 9px;
+       height: 13px; 
+    }
+
+    .error {
+        color: red; 
+    }
