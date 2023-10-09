@@ -11,5 +11,11 @@
 }
 
 .header    { grid-area: header;}
-.contenedor_seccion    {grid-area: seccion}
+.contenedor_seccion    {grid-area: seccion;
+                         justify-content: center;
+                        margin: 5% ;
+                        
+                       
+                       
+                       }
 .footer    { grid-area: footer;}
