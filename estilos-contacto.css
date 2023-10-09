@@ -55,7 +55,10 @@
 .asuntoFormulario input {width:40%;}
 .textAFormulario  {    grid-area: textA; }
 
-.textAFormulario textarea {width:100px;}
+#nombre {width: 28vw}
+#dni {width: 28vw}
+#correo{width: 28vw}
+textarea {width: 80vw; height:15vh }
 .botoniFormulario {grid-area:botoni;}
 .botoncFormulario {grid-area:botonc; text-align: center;}
 .botondFormulario {grid-area:botond;}
@@ -122,7 +125,7 @@
    
 
     .contenedor_formulario{
-        grid-template: 0.3fr 0.3fr 0.3fr 0.3fr 0.8fr 0.3fr 0.3fr 10fr 0.3fr 0.3fr 0.3fr/ auto ;
+        grid-template: 0.3fr 0.3fr 0.3fr 0.3fr 0.8fr 0.3fr 0.3fr 2fr 0.3fr 0.3fr 0.3fr/ auto ;
         grid-template-areas: 
         "nombre"
          "dni" 
