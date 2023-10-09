@@ -75,7 +75,7 @@
         text-align: center;
     }
     .ofertas img {
-        width:30%;
+        width:50%;
     }
    
 }
@@ -86,6 +86,7 @@
    max-width: 100%;
    margin:0 auto;
    padding:3rem 2rem;
+   box-sizing: border-box;
    
    }
 
@@ -150,5 +151,19 @@
      width: 100%;
    }
  }
+
+ @media screen and (max-width: 850px) {
+   .contenedor_productos .listas_productos {
+      grid-template-columns: 1fr;
+   }
+
+   .contenedor_productos .listas_productos .productos {
+      padding: 3rem 2rem;
+   }
+
+   .contenedor_productos .listas_productos .productos img {
+      width: 100%;
+   }
+}
 
 
