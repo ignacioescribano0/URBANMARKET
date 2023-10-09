@@ -46,8 +46,8 @@
 
 
 .nombreFormulario  {    grid-area: nombre;}
-.dniFormulario  {    grid-area: dni;}
-.correoFormulario  {    grid-area: correo;}
+.dniFormulario  {    grid-area: dni; }
+.correoFormulario  {    grid-area: correo; }
 .telefonoFormulario  {    grid-area: telefono;}
 .tarjetaFormulario  {    grid-area: tarjeta;}
 .tarjeta1Formulario  {    grid-area: tarjeta1;}
@@ -55,9 +55,8 @@
 .asuntoFormulario input {width:40%;}
 .textAFormulario  {    grid-area: textA; }
 
-#nombre {width: 28vw}
-#dni {width: 28vw}
-#correo{width: 28vw}
+.campoFormW1 { width: 28vw;}
+
 textarea {width: 80vw; height:15vh }
 .botoniFormulario {grid-area:botoni;}
 .botoncFormulario {grid-area:botonc; text-align: center;}
