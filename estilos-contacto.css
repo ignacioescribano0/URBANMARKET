@@ -2,6 +2,7 @@
 .contenedor_global {
     display: grid;
     
+    
     grid-template: 0.5fr 0.5 2fr 1fr 1fr / auto auto auto; /*6 filas / 3 columnas */
     grid-template-areas: "header header header" 
                          "contacto contacto contacto"
@@ -13,19 +14,21 @@
     gap: 1px;
 }
 
-.header    {    grid-area: header;}
-.contenedor_contacto   { grid-area: contacto; padding-top: 20px;padding-bottom: 30px;}
-.formulario   { grid-area: form; }   /*background-color: bisque;*/
-.mapa {grid-area: mapa;}
-.footer    { grid-area: footer;}
+.header    {    grid-area: header;width:100vw;}
+.contenedor_contacto   { grid-area: contacto; padding-top: 20px;padding-bottom: 30px;width:100vw;}
+.formulario   { grid-area: form;width:100vw; }   /*background-color: bisque;*/
+.mapa {grid-area: mapa; width:100vw;}
+.footer    { grid-area: footer; width:100vw;}
 /* CONTACTO */
 
 
 .contenedor_formulario {
     display: grid;
-    padding: 20px;
+    /*padding: 20px;*/
+   
     
     justify-content:space-evenly;
+    
    /* background-color: bisque;*/
     grid-template: 0.3fr 0.3fr 0.3fr 1fr 0.3fr/ auto auto auto ;
     grid-template-areas: "nombre dni correo"
@@ -45,20 +48,23 @@
 
 
 .nombreFormulario  {    grid-area: nombre;}
-.dniFormulario  {    grid-area: dni;}
-.correoFormulario  {    grid-area: correo;}
+.dniFormulario  {    grid-area: dni; }
+.correoFormulario  {    grid-area: correo; }
 .telefonoFormulario  {    grid-area: telefono;}
 .tarjetaFormulario  {    grid-area: tarjeta;}
 .tarjeta1Formulario  {    grid-area: tarjeta1;}
-.asuntoFormulario {    grid-area: asunto;    text-align: center;}
+.asuntoFormulario {    grid-area: asunto;  display:grid ; align-content:normal; justify-items:left;}
+.asuntoFormulario input {width:25vw;}
 .textAFormulario  {    grid-area: textA; }
 
-.textAFormulario textarea {width:100px;}
+.campoFormW1 { width: 28vw;}
+
+textarea {width: 80vw; height:15vh }
 .botoniFormulario {grid-area:botoni;}
 .botoncFormulario {grid-area:botonc; text-align: center;}
 .botondFormulario {grid-area:botond;}
-#botonSubmit {width: 120px;background-color: #304E9D; color:white;}
-#botonResetear {width:120px;background-color: #304E9D;color:white;   }
+#botonSubmit {width: 30px;background-color: #304E9D; color:white;}
+#botonResetear {width:30px;background-color: #304E9D;color:white;   }
 .info_contacto{
         text-align: center; 
 }
@@ -79,6 +85,7 @@
 
 .map-responsive{
     overflow: hidden;
+    width:100vw;
     padding-bottom: 30%;
     position: relative;
     height: 0;
@@ -89,7 +96,8 @@
     left:0;
     top: 0;
     height: 100%;
-    width: 100%;
+    width:100vw;
+    /*width: 100%;*/
     position: absolute;
 }
 
@@ -120,7 +128,7 @@
    
 
     .contenedor_formulario{
-        grid-template: 0.3fr 0.3fr 0.3fr 0.3fr 0.8fr 0.3fr 0.3fr 0.3fr 0.3fr 0.3fr 0.3fr/ auto ;
+        grid-template: 0.3fr 0.3fr 0.3fr 0.3fr 0.8fr 0.3fr 0.3fr 2fr 0.3fr 0.3fr 0.3fr/ auto ;
         grid-template-areas: 
         "nombre"
          "dni" 
