@@ -11,12 +11,12 @@
     grid-gap: 20px; 
 }
 
-.header    { grid-area: header;}
-.contenedor_descuentos { grid-area: contenedor_descuentos;}
-.pagos { grid-area: pagos; }
-.footer    { grid-area: footer;}
+.header    { grid-area: header;width:100vw;}
+.contenedor_descuentos { grid-area: contenedor_descuentos;width:100vw;}
+.pagos { grid-area: pagos;width:100vw; }
+.footer    { grid-area: footer;width:100vw;}
 
-
+.pagos img {width:45vw;};
 
 /* DESCUENTOS */
 
@@ -46,6 +46,8 @@
 
 
 @media (max-width:1100px){
+    .pagos img {width:90vw;}
+   
 
     .descuentos{
         display: grid;
@@ -99,6 +101,7 @@
 
 
 @media (max-width: 1060px) {
+    .pagos img {width:90vw;}
     .pagos {
         grid-template-columns: 1fr; 
     }
