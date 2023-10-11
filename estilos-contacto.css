@@ -1,3 +1,8 @@
+.contenido {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
 
 .contenedor_global {
     display: grid;
@@ -9,6 +14,7 @@
     grid-template-areas: "header header header" 
                          "contacto contacto contacto"
                          "form form form"
+                         "clientes clientes clientes"
                          "mapa mapa mapa" 
                          "footer footer footer";
 
@@ -19,7 +25,8 @@
 
 .header    {    grid-area: header;width:100vw;}
 .contenedor_contacto   { grid-area: contacto; padding-top: 20px;padding-bottom: 30px;width:100vw;}
-.contenedor_formulario   { grid-area: form;width:90vw;padding-bottom: 6vh;}   /*background-color: bisque;*/
+.contenedor_formulario   { grid-area: form;width:90vw;padding-bottom: 6vh;}  
+.clientes  { grid-area: clientes;width:100vw;height:60vh;}  
 .mapa {grid-area: mapa; width:100vw;}
 .footer    { grid-area: footer; width:100vw;}
 /* CONTACTO */

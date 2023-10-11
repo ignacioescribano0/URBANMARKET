@@ -155,11 +155,21 @@
         </form>
     
     </seccion>
+    <seccion class="clientes">
+        <div >
+            <button onclick="traerDatosArchivo()">Obtener datos</button>
+        </div>
+       <div  id="contenido" class="contenido">
+
+       </div>
+    
+    </seccion>
     <seccion class="mapa">
         <div class="map-responsive">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.3448071211596!2d-58.38632792405984!3d-34.59544145706142!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccab9d289c3fd%3A0xab8a416c9ee7dc13!2sAv.%20Sta.%20Fe%201142%2C%20C1059ABS%20CABA!5e0!3m2!1ses-419!2sar!4v1695146176256!5m2!1ses-419!2sar"  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </seccion>
+
     <footer class="footer"> 
         <div class="contenedor_footer" >
             <div class="seccion_footer nosotros_footer"> 
@@ -219,6 +229,58 @@
     
 
 </main>
+<script>
+    // Creo un objeto que contiene el elemento #contenido del DOM
+  //  let HTML_a_mostrar = ""//document.querySelector('#contenido');
+  
+    
+  hacerTrabajo()
+  setInterval( hacerTrabajo, 10000); 
+   
+  function hacerTrabajo (){
+        
+    fetch('clientes.txt') // Archivo a leer
+            .then(response=>response.text())
+            .then(TEXT=>parsea(TEXT))
+        
+
+    }
+            
+
+        
+   // }   
+    
+    function parsea(argumento) {
+                    
+                nameArr =argumento.split(',');
+
+            fetch('https://randomuser.me/api/?nat=es')
+            .then(datos => datos.json())
+            .then(info=>muestraTarjeta(info))
+                    
+    }
+    function muestraTarjeta(datos) {
+                    // Actualiza el contenido del elemento HTML con el id "contenido".HTML_a_mostrar.innerHTML = nameArr[1];
+                   
+                    contenido.innerHTML += `
+                        <div class="tarjeta">
+                            <!-- Muestra una imagen obtenida de los datos de la API. -->
+                            <img src="${datos.results[0].picture.large}"</img><br>
+
+                            <!-- Muestra el nombre obtenido de los datos de la API. -->
+                            Nombre: ${datos.results[0].name.last}, ${datos.results[0].name.first}<br>
+
+                           prueba: ${nameArr[0]}<br>
+
+                            <!-- Muestra la contraseña obtenida de los datos de la API. -->
+                            Pass: ${datos.results[0].login.password}<br>
+
+                            <!-- Muestra la dirección de correo electrónico obtenida de los datos de la API. -->
+                            ${datos.results[0].email}
+                        </div>`;
+    }            
+    //console.log(nameArr[1])
+</script>
 </body>   
 </html> 
 
