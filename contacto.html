@@ -16,6 +16,21 @@
         
     </head>
 <body> 
+    <script type="text/javascript">
+        function habilitaDesabilitaTarjeta() {
+            var chkSi = document.getElementById("chkSi");
+            var campoTarjeta = document.getElementById("tarjeta");
+            if (chkSi.checked==true){
+                campoTarjeta.disabled=false;
+            }
+            else {
+                campoTarjeta.value =""
+                campoTarjeta.disabled=true;
+            }
+            
+           
+        }
+    </script>
  <!--WHATSAPP -->
  <a href="https://api.whatsapp.com/send?phone=541168820881" class="btn-wsp" target="_blank"> <i class="fa fa-phone" aria-hidden="true"></i>
  </a>
@@ -58,60 +73,71 @@
         
     
     </seccion>
-    <seccion class="formulario">
-        <fieldset>
-        <form  action="mostrar_datos.html" class="contenedor_formulario">
+    <seccion class="contenedor_formulario">
+    
+        <form  action="https://formspree.io/f/mgejrvya" method="post" class="formulario">
             
                 
             <div class="nombreFormulario" >
-                <h3>
+                
                     <label for="nombre">Nombre:</label>
-                </h3>
-
+                <br>
                 <input  type="text" name="nombre" id ="nombre" class="campoFormW1"  required>
             </div>
             <div class="dniFormulario">
-                <h3>
+                
                     <label for="dni">Dni:</label>
-                </h3>
-                <input type="text" name="dni"  id="dni" class="campoFormW1" value=""  maxlength="5">
+                <br>
+                <input type="text" name="dni"  id="dni" class="campoFormW1" value=""  >
             </div>  
             <div class="correoFormulario">
-                <h3>
+                
                 <label for="correo">Correo:</label>
-                </h3>
-                <input type="text" name="correo"  id="correo" class="campoFormW1" value=""  maxlength="5">
+                <br>
+                <input type="correo" name="correo"  id="correo" class="campoFormW1" value=""  >
             </div>  
             <div class="telefonoFormulario">
-            <h3>
+            
                 <label for="telefono">Telefono:</label>
-            </h3>
-            <input type="text" name="telefono" id="telefono"  class="campoFormW1" value="" size="40" maxlength="5">
+                <br>
+            <input type="text" name="telefono" id="telefono"  class="campoFormW1" value=""  >
             </div>  
             <div class="tarjetaFormulario">
-                <h3>
-                    <label for="tarjeta">Tarjeta:</label>
-                </h3>
-                <input type="text" name="tarjeta" id="tarjeta"  class="campoFormW1" value="" size="40" maxlength="5">
+                <br>
+                    <label for="radio1">¿Tenés tu Tarjeta UrbanMarket?</label>
+                    <!--<label for="tarjeta">Tarjeta:</label> -->
+                
+                <input type="radio" name="opcionTarjeta" id="chkSi" onclick="habilitaDesabilitaTarjeta()"/>Si
+                <input type="radio" name="opcionTarjeta" checked id="chkNo" onclick="habilitaDesabilitaTarjeta()" />No
+               <!-- <input type="text" name="tarjeta" id="tarjeta"  class="campoFormW1" value="" size="40" maxlength="5">-->
             </div>  
             <div class="tarjetaFormulario1">
-                <h3>
-                    <label for="tarjeta1">Tarjeta1:</label>
-                </h3>
-                <input type="text" name="dni" id="tarjeta1" class="campoFormW1" value="" size="40" maxlength="5">
+                
+                    <label for="opcionTarjeta">Nro. Tarjeta:</label>
+                <br>
+                <input type="text" name="opcionTarjeta" id="tarjeta" class="campoFormW1" value="" disabled >
             </div>  
             <div class="asuntoFormulario">
-                <h3>
+                
                     <label  for="asunto">Asunto:</label>
-                </h3>
-                <input type="text" name="dni" id="asunto" value="" size="40" maxlength="5">
+                
+                <!--<input type="text" name="dni" id="asunto" value="" >-->
+                <select type="asunto" name=asunto id="asunto">
+                    <option value="Clientes">Atención al cliente
+                    <option value="Proveedores">Contacto de proveedores
+                    <option value="Elegir">Reclamo
+                    <option value="Comercial">Formar Parte
+                </select>
+             
+                
+
             </div>  
             <div class="textAFormulario" >
-                    <h3>
+                    
                         <label for="com">Tu mensaje</label> 
-                    </h3>
+                    
                     <textarea name="comentario" id="textArea"  placeholder="Deje su mensaje"></textarea>
-        
+                    
             </div>
             <div class="botoniFormulario">
 
@@ -122,12 +148,12 @@
         
             <div class="botondFormulario">
                 
-                <input type="reset" value="Dejar en blanco todos los campos" id="botonResetear">
+               <!-- <input type="reset" value="Dejar en blanco todos los campos" id="botonResetear">-->
             
             </div>
             
         </form>
-    </fieldset>
+    
     </seccion>
     <seccion class="mapa">
         <div class="map-responsive">

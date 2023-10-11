@@ -1,7 +1,9 @@
 
 .contenedor_global {
     display: grid;
+    justify-items:center;
     
+   
     
     grid-template: 0.5fr 0.5 2fr 1fr 1fr / auto auto auto; /*6 filas / 3 columnas */
     grid-template-areas: "header header header" 
@@ -12,20 +14,23 @@
 
 
     gap: 1px;
+   
 }
 
 .header    {    grid-area: header;width:100vw;}
 .contenedor_contacto   { grid-area: contacto; padding-top: 20px;padding-bottom: 30px;width:100vw;}
-.formulario   { grid-area: form;width:100vw; }   /*background-color: bisque;*/
+.contenedor_formulario   { grid-area: form;width:90vw;padding-bottom: 6vh;}   /*background-color: bisque;*/
 .mapa {grid-area: mapa; width:100vw;}
 .footer    { grid-area: footer; width:100vw;}
 /* CONTACTO */
 
 
-.contenedor_formulario {
+.formulario {
     display: grid;
-    /*padding: 20px;*/
-   
+    padding: 5vh;
+    width:100%; 
+    row-gap: 5vh;
+    
     
     justify-content:space-evenly;
     
@@ -36,15 +41,15 @@
                          "asunto asunto asunto"
                          "textA textA textA"
                          "botoni botonc botond";
+                         
+                         
+                         background-color: #fff;
+                         border: 2px solid #DE7D39;
+                         
+                         border-radius: 15px;
    
                 
 }
-
-
-
-   
-
-
 
 
 .nombreFormulario  {    grid-area: nombre;}
@@ -54,57 +59,88 @@
 .tarjetaFormulario  {    grid-area: tarjeta;}
 .tarjeta1Formulario  {    grid-area: tarjeta1;}
 .asuntoFormulario {    grid-area: asunto;  display:grid ; align-content:normal; justify-items:left;}
-.asuntoFormulario input {width:25vw;}
+
 .textAFormulario  {    grid-area: textA; }
+label {
+    text-align: left;
+    margin-bottom: 10px;
+}
 
-.campoFormW1 { width: 28vw;}
+select {width:45vw;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;}
 
-textarea {width: 80vw; height:15vh }
+.campoFormW1 { 
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;}
+
+textarea {width: 80vw;
+    height:30vh ;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;}
+
 .botoniFormulario {grid-area:botoni;}
 .botoncFormulario {grid-area:botonc; text-align: center;}
 .botondFormulario {grid-area:botond;}
-#botonSubmit {width: 30px;background-color: #304E9D; color:white;}
-#botonResetear {width:30px;background-color: #304E9D;color:white;   }
+#botonSubmit {
+    background-color: #DE7D39;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin: 4px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+   /* width: 30px;background-color: #304E9D; color:white;*/
+
 .info_contacto{
-        text-align: center; 
+    text-align: center; 
 }
 
 .fa-phone-square{
     font-size: 22px;
 }
 
-/* CONTACTO_RESPONSIVE */
-
-@media (max-width:768px){
-   
-    .info_contacto{
-        text-align: center; 
-}
-   
-}
-
 .map-responsive{
     overflow: hidden;
-    width:100vw;
+    width:100%;
     padding-bottom: 30%;
     position: relative;
-    height: 0;
-
-}
-
+    height: 0;  
+}   
 .map-responsive iframe {
     left:0;
     top: 0;
     height: 100%;
-    width:100vw;
+    width:100%;
     /*width: 100%;*/
     position: absolute;
 }
 
+/* CONTACTO_RESPONSIVE */
+
+
 @media (max-width:800px){
+
+    
+    .info_contacto{ text-align: center;}
+    
+    .campoFormW1 { width: 40vw;}
+    .asuntoFormulario select {width:45vw;}
+   
+    
+    
+
    
       
-    .contenedor_formulario{
+    .formulario{
         grid-template: 0.3fr 0.3fr 0.3fr 0.3fr 0.8fr 0.3fr 0.3fr 0.3fr/ auto auto ;
         grid-template-areas: 
         "nombre dni" 
@@ -126,8 +162,11 @@ textarea {width: 80vw; height:15vh }
 
 @media (max-width:400px){
    
-
-    .contenedor_formulario{
+    .info_contacto{ text-align: center;}
+    
+    .campoFormW1 { width: 80vw;}
+    .asuntoFormulario select {width:80vw;}
+    .formulario{
         grid-template: 0.3fr 0.3fr 0.3fr 0.3fr 0.8fr 0.3fr 0.3fr 2fr 0.3fr 0.3fr 0.3fr/ auto ;
         grid-template-areas: 
         "nombre"

@@ -1,6 +1,7 @@
 /*ESTRUCTURA BODY*/
 .contenedor_global {
     display: grid;
+    justify-items:center;
     grid-template-columns: 1fr; 
     grid-template-rows: auto; 
     grid-template-areas:
