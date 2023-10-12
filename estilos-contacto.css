@@ -1,26 +1,20 @@
-.contenedor_clientes{
-    display:grid;
-    justify-items:center;
-    align-items: center;
-    width:100vw;
-    height:65vh;
-    background-color: brown;
-   
-   }
+ 
    .cliente1{
+       display:flex;
        width:90%;
        height:95%;
        background-color:blue;
    }
    .cliente2{
+       display:flex;
        width:90%;
        height:95%;
        background-color:aqua;
    }
    .contenedorFotoYNombre{
-       width:30%;
+       width:25%;
        height:100%;
-       background-color:black;
+       
    }
    .foto{
        width:100%;
@@ -44,11 +38,11 @@
     text-align: center;
 }
 
-.contenido {
+/*.contenido {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-}
+    justify-content: center;}*/
+
 /*hasta aca todas cosas agregadas  para la seccion clietnes */
 .contenedor_global {
     display: grid;
@@ -82,7 +76,10 @@
 .mapa {grid-area: mapa; width:100vw;}
 .footer    { grid-area: footer; width:100vw;}
 /* CONTACTO */
+.contenedor_clientes img {
+    width:80%;
 
+}
 
 .formulario {
     display: grid;
