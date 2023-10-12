@@ -230,7 +230,7 @@
   
     
   hacerTrabajo()
-  setInterval( hacerTrabajo, 2000); 
+  setInterval( hacerTrabajo, 3000); 
    
   function hacerTrabajo (){
         
@@ -266,11 +266,11 @@
                                 </div>
                                 <div>
                             			<!-- Muestra el nombre obtenido de los datos de la API. -->
-                            			${datos.results[0].name.first}  ${datos.results[0].name.last} 
+                            			${datos.results[0].name.first}<br>   ${datos.results[0].name.last} 
 					            </div>
 				            </div>
                             <div class="feedback">
-                                ${nameArr[0]}
+                                ${nameArr[Math.floor(Math.random() * 24)]}
 				            </div>
                         </div>
                         <div class="cliente2">
@@ -281,11 +281,11 @@
                                 </div>
                                 <div>
                             			<!-- Muestra el nombre obtenido de los datos de la API. -->
-                            			${datos.results[1].name.first}  ${datos.results[1].name.last} 
+                            			${datos.results[1].name.first} <br> ${datos.results[1].name.last} 
 					            </div>
 				            </div>
                             <div class="feedback">
-                                ${nameArr[1]}
+                                ${nameArr[Math.floor(Math.random() * 24)]}
 				            </div>
                         </div>
                         `;
