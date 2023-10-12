@@ -1,9 +1,55 @@
+.contenedor_clientes{
+    display:grid;
+    justify-items:center;
+    align-items: center;
+    width:100vw;
+    height:65vh;
+    background-color: brown;
+   
+   }
+   .cliente1{
+       width:90%;
+       height:95%;
+       background-color:blue;
+   }
+   .cliente2{
+       width:90%;
+       height:95%;
+       background-color:aqua;
+   }
+   .contenedorFotoYNombre{
+       width:30%;
+       height:100%;
+       background-color:black;
+   }
+   .foto{
+       width:100%;
+       height:85%;
+       background-color: white;
+   }
+   .nombre{
+       width:100%;
+       height:15%;
+       background-color:chartreuse;
+   }
+
+.tarjeta {
+    float: left;
+    border: 1px solid #555;
+    border-radius: 10px;
+    margin:4px; padding: 2px;
+    width:250px;
+    height:240px;
+    overflow: hidden;
+    text-align: center;
+}
+
 .contenido {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
-
+/*hasta aca todas cosas agregadas  para la seccion clietnes */
 .contenedor_global {
     display: grid;
     justify-items:center;
@@ -26,7 +72,13 @@
 .header    {    grid-area: header;width:100vw;}
 .contenedor_contacto   { grid-area: contacto; padding-top: 20px;padding-bottom: 30px;width:100vw;}
 .contenedor_formulario   { grid-area: form;width:90vw;padding-bottom: 6vh;}  
-.clientes  { grid-area: clientes;width:100vw;height:60vh;}  
+.contenedor_clientes  { grid-area: clientes;
+    display:grid;
+    justify-items:center;
+    align-items: center;
+    width:100vw;
+    height:65vh;
+    background-color: brown;}  
 .mapa {grid-area: mapa; width:100vw;}
 .footer    { grid-area: footer; width:100vw;}
 /* CONTACTO */
