@@ -61,14 +61,14 @@ const validarFormulario = (e) => {
             if (e.target.value !== "Seleccionar") {
                 grupo.classList.remove('formulario__grupo-incorrecto');
                 grupo.classList.add('formulario__grupo-correcto');
-                document.querySelector(`#grupo__asunto .formulario__input-error`).classList.remove('formulario__input-error-activo');
-                document.querySelector(`#grupo__asunto .formulario__input-error`).classList.add('formulario__input-error');
+                document.querySelector(`#grupo__asunto p`).classList.remove('formulario__input-error-activo');
+                document.querySelector(`#grupo__asunto p`).classList.add('formulario__input-error');
                 campos['asunto'] = true;
             } else {
                                grupo.classList.remove('formulario__grupo-correcto');
                 grupo.classList.add('formulario__grupo-incorrecto');
-                document.querySelector(`#grupo__asunto .formulario__input-error`).classList.add('formulario__input-error-activo');
-                document.querySelector(`#grupo__asunto .formulario__input-error`).classList.remove('formulario__input-error');
+                document.querySelector(`#grupo__asunto p`).classList.add('formulario__input-error-activo');
+                document.querySelector(`#grupo__asunto p`).classList.remove('formulario__input-error');
                 campos['asunto'] = false;
             }
             break;
@@ -162,3 +162,4 @@ formulario.addEventListener('submit', (e) => {
         document.getElementById('formulario__mensaje').classList.add('formulario__mensaje-activo');
     }
 });
+
