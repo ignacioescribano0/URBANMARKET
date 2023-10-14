@@ -1,21 +1,151 @@
-
 .contenedor_global {
     display: grid;
-    grid-template: 1fr 1fr 1fr / auto; /*6 filas / 3 columnas */
-    grid-template-areas: "header" 
-                         "seccion"
-                         "footer";
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+     "header header"
+        "titulo titulo"
+        "contenido contenido"
+        "footer footer";
 
-
-    gap: 1px;
+    grid-gap: 10px;
+    
 }
 
-.header    { grid-area: header;}
-.contenedor_seccion    {grid-area: seccion;
-                         justify-content: center;
-                        margin: 5% ;
-                        
-                       
-                       
-                       }
-.footer    { grid-area: footer;}
+.header {grid-area: header;
+}
+
+.tituloSeccion {
+    font-size: 35px; 
+}
+
+.contenedor_nosotros{
+    grid-area: contenido;
+}
+.contenedor_nosotros{
+    display:grid;
+    padding: 10px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+       
+        "texto imagen"
+        "texto imagen"
+        "mision vision"
+       ;
+       grid-gap: 20px;
+}
+.tituloSeccion{
+    grid-area: titulo;
+    padding-top: 30px;
+padding-bottom: 0px;}
+
+.texto{
+    display: grid;
+    grid-area: texto;
+    border-radius: 5px;
+
+
+align-items: center;
+
+}
+.texto {
+      text-align: justify;
+      padding: 5%;
+      text-align: justify;
+     border: solid 3px;
+     border-color: #ff6600;;
+     
+     }
+
+.imagen {
+    display: grid;
+    grid-area: imagen;
+    place-content: center;
+    
+    height: auto;
+    width: auto;
+    object-fit: contain;
+    justify-content: center;
+    border-radius: 8px;
+    animation: slide 15s infinite cubic-bezier(0.55, 0.48, 0.37, 0.92);
+    
+}
+
+.imagen-nosotros {
+    width: 100%; /* Asegura que la imagen se ajuste al contenedor */
+    height: auto;
+    transform: scale(0.5); /* Inicialmente, la imagen se escala al 50% */
+    opacity: 0; /* Inicialmente, la imagen es invisible */
+    animation: entrada 2s forwards; /* Aplica la animación "entrada" durante 2 segundos */
+}
+
+@keyframes entrada {
+    from {
+        transform: scale(0.5); /* Escala al 50% al principio de la animación */
+        opacity: 0; /* Inicialmente invisible */
+    }
+    to {
+        transform: scale(1); /* Escala al 100% al final de la animación */
+        opacity: 1; /* Hace la imagen visible */
+    }
+}
+
+
+
+.mision {
+    grid-area: mision;
+    background-color:#EFEFEF ;
+    padding: 8%;
+    padding-top: 5%;
+    text-align: justify;
+   
+    border-radius: 8px;
+}
+
+
+.vision {
+    grid-area: vision;
+    background-color:#EFEFEF ;
+    padding: 8%;
+    padding-top: 5%;
+    text-align: justify;
+    
+    border-radius: 8px;
+}
+
+.footer {
+    grid-area: footer;
+}
+
+
+@media (max-width:800px) {
+    .contenedor_global {
+        display: grid;
+        grid-template-columns: 1fr ;
+        grid-template-rows: auto;
+        grid-template-areas:
+         "header"
+            "titulo"
+            "contenido"
+            "footer";
+    
+        grid-gap: 10px;
+        
+    }
+    
+    .contenedor_nosotros{
+        display:grid;
+        padding: 10px;
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+           
+            "imagen"
+            "texto"
+            "mision" 
+            "vision"
+           ;
+           grid-gap: 20px;
+    }
+
+
+}
