@@ -29,12 +29,15 @@
 
 
 .descuentos{
-  width: 100%;
+  
+  width: 80%;
+  margin: auto;
   border-radius: 20px;
   display: flex;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 30px;
   
+
 
 }
 
