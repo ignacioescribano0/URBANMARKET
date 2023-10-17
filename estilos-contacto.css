@@ -14,17 +14,18 @@
   .cliente1{
        display:flex;
        width:90vw;
-       height:37vh;
+       height:33vh;
        background-color:blue;
        background-color: #fff;
                          border: 2px solid #DE7D39;
                          
                          border-radius: 15px;
+       
    }
    .cliente2{
        display:flex;
        width:90vw;
-       height:37vh;
+       height:33vh;
        background-color:aqua;
        background-color: #fff;
        border: 2px solid #DE7D39;
@@ -63,10 +64,7 @@
     text-align: center;
 }
 
-/*.contenido {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;}*/
+
 
 /*hasta aca todas cosas agregadas  para la seccion clietnes */
 .contenedor_global {
@@ -96,7 +94,8 @@
     justify-items:center;
     align-items: center;
     width:100vw;
-    height:90vh;
+    height:99vh;
+
  /*   background-color: brown;*/
 }  
 .mapa {grid-area: mapa; width:100vw;}
@@ -188,6 +187,11 @@ textarea {width: 80vw;
 .info_contacto{
     text-align: center; 
 }
+
+.titulo_clientes{
+    text-align: center; 
+}
+
 
 .fa-phone-square{
     font-size: 22px;
