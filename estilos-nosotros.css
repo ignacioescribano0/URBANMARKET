@@ -16,8 +16,8 @@
 }
 
 .tituloSeccion {
-    /*font-size: 35px;*/
-    width:100vw;
+    /*font-size: 35px; porque sino nno cabe en la pantalla smartphone*/
+    /*width:100vw;*/
 }
 
 .contenedor_nosotros{
