@@ -12,7 +12,7 @@
     
 }
 
-.header {grid-area: header;
+.header {grid-area: header;width:100vw;
 }
 
 .tituloSeccion {
@@ -20,10 +20,11 @@
 }
 
 .contenedor_nosotros{
-    grid-area: contenido;
+    grid-area: contenido;width:100vw;
 }
 .contenedor_nosotros{
     display:grid;
+   
     padding: 10px;
     grid-template-columns: 1fr 1fr;
     grid-template-areas: 
@@ -36,12 +37,14 @@
 }
 .tituloSeccion{
     grid-area: titulo;
+    width:100vw;
     padding-top: 30px;
 padding-bottom: 0px;}
 
 .texto{
     display: grid;
     grid-area: texto;
+    
     border-radius: 5px;
 
 
@@ -115,6 +118,7 @@ align-items: center;
 
 .footer {
     grid-area: footer;
+    width:100vw;
 }
 
 
