@@ -16,21 +16,7 @@
         
     </head>
 <body> 
-    <script type="text/javascript">
-        function habilitaDesabilitaTarjeta() {
-            var chkSi = document.getElementById("chkSi");
-            var campoTarjeta = document.getElementById("tarjeta");
-            if (chkSi.checked==true){
-                campoTarjeta.disabled=false;
-            }
-            else {
-                campoTarjeta.value =""
-                campoTarjeta.disabled=true;
-            }
-            
-           
-        }
-    </script>
+
  <!--WHATSAPP -->
  <a href="https://api.whatsapp.com/send?phone=541168820881" class="btn-wsp" target="_blank"> <i class="fa fa-phone" aria-hidden="true"></i>
  </a>
@@ -73,88 +59,190 @@
         
     
     </seccion>
-    <seccion class="contenedor_formulario">
-    
-        <form  action="https://formspree.io/f/mgejrvya" method="post" class="formulario">
-            
-                
-            <div class="nombreFormulario" >
-                
-                    <label for="nombre">Nombre:</label>
-                <br>
-                <input  type="text" name="nombre" id ="nombre" class="campoFormW1"  required>
-            </div>
-            <div class="dniFormulario">
-                
-                    <label for="dni">Dni:</label>
-                <br>
-                <input type="text" name="dni"  id="dni" class="campoFormW1" value=""  >
-            </div>  
-            <div class="correoFormulario">
-                
-                <label for="correo">Correo:</label>
-                <br>
-                <input type="correo" name="correo"  id="correo" class="campoFormW1" value=""  >
-            </div>  
-            <div class="telefonoFormulario">
-            
-                <label for="telefono">Telefono:</label>
-                <br>
-            <input type="text" name="telefono" id="telefono"  class="campoFormW1" value=""  >
-            </div>  
-            <div class="tarjetaFormulario">
-                <br>
-                    <label for="radio1">¿Tenés tu Tarjeta UrbanMarket?</label>
-                    <!--<label for="tarjeta">Tarjeta:</label> -->
-                
-                <input type="radio" name="opcionTarjeta" id="chkSi" onclick="habilitaDesabilitaTarjeta()"/>Si
-                <input type="radio" name="opcionTarjeta" checked id="chkNo" onclick="habilitaDesabilitaTarjeta()" />No
-               <!-- <input type="text" name="tarjeta" id="tarjeta"  class="campoFormW1" value="" size="40" maxlength="5">-->
-            </div>  
-            <div class="tarjetaFormulario1">
-                
-                    <label for="opcionTarjeta">Nro. Tarjeta:</label>
-                <br>
-                <input type="text" name="opcionTarjeta" id="tarjeta" class="campoFormW1" value="" disabled >
-            </div>  
-            <div class="asuntoFormulario">
-                
-                    <label  for="asunto">Asunto:</label>
-                
-                <!--<input type="text" name="dni" id="asunto" value="" >-->
-                <select type="asunto" name=asunto id="asunto">
-                    <option value="Clientes">Atención al cliente
-                    <option value="Proveedores">Contacto de proveedores
-                    <option value="Elegir">Reclamo
-                    <option value="Comercial">Formar Parte
-                </select>
+
+<seccion class="contenedor_formulario">
+
+            <form action="https://formspree.io/f/mgejrvya"  method="post" class="formulario" id="formulario">
+
+               
+               
+               
+               
+                <!--grupo nombre-->
+                <div class="nombreFormulario formulario__grupo" id="grupo__nombre">
+
+                    <label for="nombre" class="formulario__label">Nombre:</label>
+                    <br>
+                    <div class="formulario__grupo-input">
+                        <input type="text" name="nombre" id="nombre" class="campoFormW1 formulario__input" required>
+                        <i class="formulario__validacion-estado fa-solid fa-circle-xmark"></i>
+
+                    </div>
+                    <p class="formulario__input-error"> El nombre solo puede contener letras y espacios.</p>
+                </div>
+
+
+                <!--grupo dni-->
+
+                <div class="dniFormulario formulario__grupo" id="grupo__dni">
+
+                    <label for="dni" class="formulario__label">Dni:</label>
+                    <br>
+                    <div class="formulario__grupo-input">
+                        <input type="text" name="dni" id="dni" class="campoFormW1 formulario__input" value="">
+                        <i class="formulario__validacion-estado fa-solid fa-circle-xmark"></i>
+                    </div>
+                    <p class="formulario__input-error"> El DNI debe contener entre 7 y 9 caracteres numéricos. </p>
+                </div>
+
+                <!--grupo correo-->
+
+                <div class="correoFormulario formulario__grupo" id="grupo__correo">
+
+                    <label for="correo" class="formulario__label">Correo:</label>
+                    <br>
+                    <div class="formulario__grupo-input">
+                        <input type="correo" name="correo" id="correo" class="campoFormW1 formulario__input" value="">
+                        <i class="formulario__validacion-estado fa-solid fa-circle-xmark"></i>
+                    </div>
+                    <p class="formulario__input-error"> Ingrese un correo electrónico válido. </p>
+                </div>
+
+
+
+                <!--grupo telefono-->
+
+                <div class="telefonoFormulario formulario__grupo" id="grupo__telefono">
+
+                    <label for="telefono" class="formulario__label">Telefono:</label>
+                    <br>
+                    <div class="formulario__grupo-input">
+                        <input type="text" name="telefono" id="telefono" class="campoFormW1 formulario__input" value="">
+                        <i class="formulario__validacion-estado fa-solid fa-circle-xmark"></i>
+                    </div>
+                    <p class="formulario__input-error"> El telefono debe contener entre 9 y 14 caracteres numéricos,
+                        sin guiones ni espacios. </p>
+                </div>
+
+ <!--grupo tarjeta-->
+
+
+
+
+ <div class="tarjetaFormulario formulario__grupo" id="grupo__tarjeta">
+    <br>
+    <label class="formulario__label">
+        <!--<label for="tarjeta">Tarjeta:</label> -->
+        ¿Tenés tu Tarjeta UrbanMarket? </label>
+        <input class="formulario__checkbox" type="radio" name="opcionTarjeta" id="chkSi"
+            onclick="habilitaDesabilitaTarjeta()" />Si
+        <input class="formulario__checkbox" type="radio" name="opcionTarjeta" checked id="chkNo"
+            onclick="habilitaDesabilitaTarjeta()" />No
+   
+    <!-- <input type="text" name="tarjeta" id="tarjeta"  class="campoFormW1" value="" size="40" maxlength="5">-->
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!--grupo nombre-tarjeta-->
+<div class="tarjetaFormulario1  formulario__grupo" id="grupo__nombretarjeta">
+
+
+    <label for="opcionTarjeta" class="formulario__label">Nro. Tarjeta:</label>
+    <br>
+    <div class="formulario__grupo-input">
+        <input type="text" name="opcionTarjeta" id="tarjeta" class="campoFormW1 formulario__input"
+            value="" disabled>
+        <i class="formulario__validacion-estado fa-solid fa-circle-xmark"></i>
+    </div>
+    <p class="formulario__input-error"> El numero de tarjeta debe contener 10 caracteres numéricos,
+        sin guiones ni espacios. </p>
+
+
+</div>
+
+
              
-                
 
-            </div>  
-            <div class="textAFormulario" >
-                    
-                        <label for="com">Tu mensaje</label> 
-                    
-                    <textarea name="comentario" id="textArea"  placeholder="Deje su mensaje"></textarea>
-                    
-            </div>
-            <div class="botoniFormulario">
 
-            </div>
-            <div class="botoncFormulario" > 
-                <input type="submit" value="Enviar Datos" id="botonSubmit" >
-            </div>
-        
-            <div class="botondFormulario">
-                
-               <!-- <input type="reset" value="Dejar en blanco todos los campos" id="botonResetear">-->
-            
-            </div>
-            
-        </form>
-    
-    </seccion>
+                <!--grupo asunto-->
+                <div class="asuntoFormulario formulario__grupo formulario__grupo-asunto" id="grupo__asunto">
+
+                    <label for="asunto" class="formulario__label">Asunto:</label>
+
+
+                    <!--<input type="text" name="dni" id="asunto" value="" >-->
+                    <div class="formulario__grupo-input">
+                        <select type="asunto" class="formulario__input" name="asunto" id="asunto">
+                            <option value="Seleccionar" placeholder="Seleccionar">Seleccionar</option>
+                            <option value="Clientes">Atención al cliente </option>
+                            <option value="Proveedores">Contacto de proveedores </option>
+                            <option value="Elegir">Reclamo </option>
+                            <option value="Comercial">Formar Parte </option>
+                        </select>
+
+
+                        <p class="formulario__input-error" name="mostar-error"> Debe seleccionar un asunto. </p>
+                    </div>
+                </div>
+
+
+
+                <!--grupo texto-->
+                <div class="textAFormulario formulario__grupo formulario__grupo-texto" id="grupo__texto">
+
+                    <label for="com" class="formulario__label">Tu mensaje</label>
+                    <div class="formulario__grupo-input">
+                        <textarea class="formulario__input-texto" name="comentario" id="textArea"
+                            placeholder="Deje su mensaje"></textarea>
+                            <i class="formulario__validacion-estado fa-solid fa-circle-xmark"></i>
+                        </div>
+                    <p class="formulario__input-error">Por favor, detállenos el motivo de su consulta.</p>
+                </div>
+
+
+
+
+                <div class="formulario__mensaje" id="formulario__mensaje">
+                    <p> <i class="fa-solid fa-triangle-exclamation"> </i> <b>Error: </b>
+                        Por favor rellená el formulario correctamente.
+                    </p>
+
+                </div>
+
+                <div class="botoniFormulario">
+
+                </div>
+
+                <div class="botoncFormulario formulario__grupo formulario__grupo-btn-enviar">
+                    <button type="submit" class="formulario__btn" id="botonSubmit">Enviar Datos</button>
+                    <p class="formulario__mensaje-exito" id="formulario__mensaje-exito">El formulario ha sido
+                        enviado!</p>
+
+                </div>
+
+                <div class="botondFormulario">
+
+                  
+
+                </div>
+
+            </form>
+
+        </seccion>
+
+
+
+	
     <seccion id="contenido" class="contenedor_clientes">
         <p> Esto es lo que nuestros clientes piensan de nosotros</p>
     </seccion>
@@ -295,6 +383,9 @@
     }            
     
 </script>
+	<script src="validaciones.js"></script>
+
+    <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
 </body>   
 </html> 
 

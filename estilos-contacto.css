@@ -119,12 +119,13 @@
     justify-content:space-evenly;
     
    /* background-color: bisque;*/
-    grid-template: 0.3fr 0.3fr 0.3fr 1fr 0.3fr/ auto auto auto ;
+    grid-template: 0.3fr 0.3fr 0.3fr 1fr 0.3fr 0.1fr/ auto auto auto ;
     grid-template-areas: "nombre dni correo"
                          "telefono tarjeta tarjeta1"
                          "asunto asunto asunto"
                          "textA textA textA"
-                         "botoni botonc botond";
+                         "botoni botonc botond"
+                        "mensaje mensaje mensaje";
                          
                          
                          background-color: #fff;
@@ -143,7 +144,9 @@
 .tarjetaFormulario  {    grid-area: tarjeta;}
 .tarjeta1Formulario  {    grid-area: tarjeta1;}
 .asuntoFormulario {    grid-area: asunto;  display:grid ; align-content:normal; justify-items:left;}
-
+.formulario__mensaje {
+     grid-area: mensaje;
+ }
 .textAFormulario  {    grid-area: textA; }
 label {
     text-align: left;
@@ -183,6 +186,116 @@ textarea {width: 80vw;
     border-radius: 10px;
 }
    /* width: 30px;background-color: #304E9D; color:white;*/
+
+.formulario__grupo-input{
+     position: relative;
+ }
+
+ .formulario__input {
+     transition: .3s ease all;
+ }
+
+ .formulario__input-error {
+     font-size: 12px;
+     margin-bottom: 0px;
+     display: none;
+
+ }
+
+ .formulario__input-error-activo {
+     display: block;
+ }
+
+ .formulario__validacion-estado {
+	position: absolute;
+	right: 2vw;
+	bottom: 3vh;
+	z-index: 100;
+	font-size: 16px;
+	opacity: 0;
+}
+ 
+
+ .formulario__checkbox {
+     margin-right: 10px;
+     margin-left: 15px;
+ }
+
+ .formulario__mensaje {
+     height: 45px;
+     line-height: 45px;
+     width: 100%;
+     background: #DE7D39;
+     padding: 0 15px;
+     border-radius: 3px;
+     text-align: center;
+     height: 45px;
+     line-height: 45px;
+     width: 100%;
+     background: #DE7D39;
+     padding: 0 15px;
+     border-radius: 3px;
+     text-align: center;
+     display: none;
+ }
+
+
+ .formulario__mensaje-activo {
+     display: block;
+ }
+
+ .formulario__grupo-btn-enviar {
+     text-align: center;
+ }
+
+
+ .formulario__btn {
+     cursor: pointer;
+     transition: .1s ease all;
+ }
+
+ .formulario__btn:hover {
+     box-shadow: 3px 0px 30px rgba(163, 163, 163, 1);
+ }
+
+ .formulario__mensaje-exito {
+
+     font-size: 18px;
+     font-weight: bold;
+     color: #cf6519;
+     display: none;
+ }
+
+ .formulario__mensaje-exito-activo {
+     display: block;
+ }
+
+
+ .formulario__grupo-correcto .formulario__validacion-estado {
+     color: #1ed12d;
+     opacity: 1;
+ }
+
+
+ .formulario__grupo-incorrecto-text textarea {
+     border: #bb2929 solid;
+ }
+
+ .formulario__grupo-incorrecto .formulario__label {
+     color: #bb2929;
+ }
+
+ .formulario__grupo-incorrecto .formulario__validacion-estado{
+    color: #bb2929;
+    opacity: 1;
+ }
+
+ .formulario__grupo-incorrecto .formulario__input{
+    
+    border:3px solid #bb2929;
+       } 
+
+
 
 .info_contacto{
     text-align: center; 
@@ -230,7 +343,7 @@ textarea {width: 80vw;
    
       
     .formulario{
-        grid-template: 0.3fr 0.3fr 0.3fr 0.3fr 0.8fr 0.3fr 0.3fr 0.3fr/ auto auto ;
+        grid-template: 0.3fr 0.3fr 0.3fr 0.3fr 0.8fr 0.3fr 0.3fr 0.3fr 0.1fr/ auto auto ;
         grid-template-areas: 
         "nombre dni" 
         "correo  telefono"
@@ -239,7 +352,8 @@ textarea {width: 80vw;
         "textA textA"
         "botoni botoni"
         "botonc botonc"
-        "botond botond";
+        "botond botond"
+        "mensaje mensaje";
         
 
     }
@@ -256,7 +370,7 @@ textarea {width: 80vw;
     .campoFormW1 { width: 80vw;}
     .asuntoFormulario select {width:80vw;}
     .formulario{
-        grid-template: 0.3fr 0.3fr 0.3fr 0.3fr 0.8fr 0.3fr 0.3fr 2fr 0.3fr 0.3fr 0.3fr/ auto ;
+        grid-template: 0.3fr 0.3fr 0.3fr 0.3fr 0.8fr 0.3fr 0.3fr 2fr 0.3fr 0.3fr 0.3fr 0.1fr/ auto ;
         grid-template-areas: 
         "nombre"
          "dni" 
@@ -268,7 +382,8 @@ textarea {width: 80vw;
         "textA "
         "botoni"
         "botonc"
-        "botond";
+        "botond"
+        "mensaje";
         
 
     }
