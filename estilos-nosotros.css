@@ -15,10 +15,6 @@
 .header {grid-area: header;width:100vw;
 }
 
-.tituloSeccion {
-    /*font-size: 35px; porque sino nno cabe en la pantalla smartphone*/
-    /*width:100vw;*/
-}
 
 .contenedor_nosotros{
     grid-area: contenido;width:100vw;
