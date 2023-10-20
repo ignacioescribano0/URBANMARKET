@@ -179,7 +179,11 @@ formulario.addEventListener('submit', (e) => {
     if (Object.values(campos).every(valor => valor === true)) {
         formulario.reset();
         for (const campo in campos) {
-            campos[campo] = false;
+            if(campo !== "tarjeta") {
+                campos[campo] = false;
+            }else{
+                campos[campo] = true; 
+            }
         };
         document.getElementById('formulario__mensaje-exito').classList.add('formulario__mensaje-exito-activo');
         document.getElementById('formulario__mensaje').classList.remove('formulario__mensaje-activo');
