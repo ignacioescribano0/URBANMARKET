@@ -73,7 +73,7 @@
     
    
     
-    grid-template: 0.5fr 0.5fr 2fr 1fr 1fr / auto auto auto; /*6 filas / 3 columnas */
+    grid-template: 0.5fr 0.5 2fr 1fr 1fr / auto auto auto; /*6 filas / 3 columnas */
     grid-template-areas: "header header header" 
                          "contacto contacto contacto"
                          "form form form"
