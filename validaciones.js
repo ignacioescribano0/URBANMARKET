@@ -170,11 +170,7 @@ asunto.addEventListener('blur', validarFormulario);
 
 
 formulario.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    console.log("Formulario enviado");
-
-
+   
 
     if (Object.values(campos).every(valor => valor === true)) {
         formulario.reset();
@@ -196,6 +192,7 @@ formulario.addEventListener('submit', (e) => {
             icono.classList.remove('formulario__grupo-correcto');
         });
     } else {
+         e.preventDefault();
         document.getElementById('formulario__mensaje').classList.add('formulario__mensaje-activo');
     }
 });
