@@ -27,16 +27,16 @@ const campos = {
     dni: false,
     correo: false,
     telefono: false,
-    texto: false,
+    textArea: false,
     asunto: false,
-    nombretarjeta: false,
+    tarjeta: false,
 }
 
 
 
 
 const validarFormulario = (e) => {
-    switch (e.target.name) {
+    switch (e.target.id) {
         case "nombre":
             validarCampo(expresiones.nombre, e.target, 'nombre');
             break;
@@ -49,11 +49,11 @@ const validarFormulario = (e) => {
         case "telefono":
             validarCampo(expresiones.telefono, e.target, 'telefono');
             break;
-        case "comentario":
+        case "textArea":
             validarCampo(expresiones.texto, e.target, 'texto');
             break;
 
-        case "opcionTarjeta":
+        case "tarjeta":
 
             var chkSi = document.getElementById("chkSi");
 
@@ -64,24 +64,25 @@ const validarFormulario = (e) => {
                 if (expresiones.tarjeta.test(e.target.value)) {
                     grupo.classList.remove('formulario__grupo-incorrecto');
                     grupo.classList.add('formulario__grupo-correcto');
-                    document.querySelector(`#nombretarjeta i`).classList.add('fa-check-circle');
-                    document.querySelector(`#nombretarjeta i`).classList.remove('fa-circle-xmark');
-                    document.querySelector(`#nombretarjeta p`).classList.remove('formulario__input-error-activo');
-                    document.querySelector(`#nombretarjeta p`).classList.add('formulario__input-error');
-                    campos['nombretarjeta'] = true;
-                } else {
+                    document.querySelector(`#grupo__nombretarjeta i`).classList.add('fa-check-circle');
+                    document.querySelector(`#grupo__nombretarjeta i`).classList.remove('fa-circle-xmark');
+                    document.querySelector(`#grupo__nombretarjeta p`).classList.remove('formulario__input-error-activo');
+                    document.querySelector(`#grupo__nombretarjeta p`).classList.add('formulario__input-error');
+                    campos['tarjeta'] = true;
+                } 
+                else {
                     grupo.classList.remove('formulario__grupo-correcto');
                     grupo.classList.add('formulario__grupo-incorrecto');
                     document.querySelector(`#grupo__nombretarjeta i`).classList.add('fa-circle-xmark');
                     document.querySelector(`#grupo__nombretarjeta i`).classList.remove('fa-check-circle');
                     document.querySelector(`#grupo__nombretarjeta p`).classList.add('formulario__input-error-activo');
                     document.querySelector(`#grupo__nombretarjeta p`).classList.remove('formulario__input-error');
-                    campos['nombretarjeta'] = false;
+                    campos['tarjeta'] = false;
                 }
             }
 
             else {
-                campos['nombretarjeta'] = true;
+                campos['tarjeta'] = true;
             }
 
 
@@ -171,7 +172,7 @@ asunto.addEventListener('blur', validarFormulario);
 formulario.addEventListener('submit', (e) => {
     e.preventDefault();
 
-
+    console.log("Formulario enviado");
 
 
 
@@ -208,3 +209,4 @@ function habilitaDesabilitaTarjeta() {
     }
 
 }
+
