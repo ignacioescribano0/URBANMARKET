@@ -27,9 +27,9 @@ const campos = {
     dni: false,
     correo: false,
     telefono: false,
-    textArea: false,
+    texto: false,
     asunto: false,
-    tarjeta: false,
+    tarjeta: true,
 }
 
 
@@ -202,10 +202,12 @@ function habilitaDesabilitaTarjeta() {
     var campoTarjeta = document.getElementById("tarjeta");
     if (chkSi.checked == true) {
         campoTarjeta.disabled = false;
+        campos['tarjeta']=false;
     }
     else {
         campoTarjeta.value = ""
         campoTarjeta.disabled = true;
+         campos['tarjeta']=true;
     }
 
 }
