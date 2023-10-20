@@ -279,7 +279,7 @@ textarea {width: 82vw;
 
 
  .formulario__grupo-incorrecto textarea {
-     border: #bb2929 solid 1px;
+     border: #bb2929 solid 3px;
  }
 
  .formulario__grupo-incorrecto .formulario__label {
