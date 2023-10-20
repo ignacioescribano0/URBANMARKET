@@ -278,7 +278,7 @@ textarea {width: 82vw;
  }
 
 
- .formulario__grupo-incorrecto-text textarea {
+ .formulario__grupo-incorrecto textarea {
      border: #bb2929 solid 1px;
  }
 
