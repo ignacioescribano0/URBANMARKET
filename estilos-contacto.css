@@ -187,7 +187,7 @@ textarea {width: 82vw;
 }
    /* width: 30px;background-color: #304E9D; color:white;*/
 
-.formulario__grupo-input{
+ .formulario__grupo-input {
      position: relative;
  }
 
@@ -200,22 +200,23 @@ textarea {width: 82vw;
      margin-bottom: 0px;
      display: none;
 
+
  }
 
  .formulario__input-error-activo {
      display: block;
-	 font-size: 12px;
+    font-size:12px;
  }
 
  .formulario__validacion-estado {
-	position: absolute;
-	right: 2vw;
-	bottom: 3vh;
-	z-index: 100;
-	font-size: 16px;
-	opacity: 0;
-}
- 
+     position: absolute;
+     right: 2vw;
+     bottom: 3vh;
+     z-index: 100;
+     font-size: 16px;
+     opacity: 0;
+ }
+
 
  .formulario__checkbox {
      margin-right: 10px;
@@ -279,23 +280,22 @@ textarea {width: 82vw;
 
 
  .formulario__grupo-incorrecto textarea {
-     border: #bb2929 solid 3px;
+     border: #bb2929 solid 3px ;
  }
 
  .formulario__grupo-incorrecto .formulario__label {
      color: #bb2929;
  }
 
- .formulario__grupo-incorrecto .formulario__validacion-estado{
-    color: #bb2929;
-    opacity: 1;
+ .formulario__grupo-incorrecto .formulario__validacion-estado {
+     color: #bb2929;
+     opacity: 1;
  }
 
- .formulario__grupo-incorrecto .formulario__input{
-    
-    border:1px solid #bb2929;
-       } 
+ .formulario__grupo-incorrecto .formulario__input {
 
+     border: 1px solid #bb2929;
+ }
 
 
 .info_contacto{
