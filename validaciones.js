@@ -213,3 +213,10 @@ function habilitaDesabilitaTarjeta() {
 
 }
 
+
+
+function inicializar(){
+    document.getElementById('formulario').reset();
+
+}
+
