@@ -1,4 +1,4 @@
-EN EL ULTIMO COMMIT A MAIN (ESTRUCTURA GENERAL 1) quedo armada la siguiente estructura:
+LA ESTRUCTURA GENERAL:
 
 index.html
 nosotros.html
@@ -27,19 +27,3 @@ estilos header.css y estilos footer.css
 
 Ya todas las páginas estan interconectadas a traves del menu de navegación dando ya la imagen de un sitio web completo.
 
-Pero aún queda mucho por hacer
-
-- formulario, esta armado sobre un grid asi que hacerlo responsive seria muy fácil ahora pero no llegue todavia. También se puede probar hacerlo con bootstrap lo que nos permitiria usar ese framework y supongo obtener puntos adicionales en el proyecto. También falta todo el codigo de validación del formulario que se podra agregar cuando nos expliquen esa parte.
-
-- En la pagina principal faltan las secciones "Banner" y "Pagos"
-- Falta el contenido de la pagina productos, ofertas y nosotros.
-
-- A su vez hay bugs a arreglar , hacer que las cosas bien responsive, optimiza codigo , etc
-
-- y muchas mas cosas que no me acuerdo.  La verdad que el trabajo de Pablo ha sido excelente y solo por eso la pagina se ve como se , además ha escrito la gran mayoría del codigo también. Muchas Gracias, tenemos mucha suerte de tenerte en nuestro grupo.
-
-Publique el sitio en github pages dado que es otra de las tareas del proyecto, se puede ver en:
-
-https://ignacioescribano0.github.io/URBANMARKET/index.html
-
-y deberia ir actualizando dinamicamente a medida que trabajos en el proyecto. Ahi pueden ver como va quedando. Al entregar el trabajo tengo que pasarle ese link al profesor.
