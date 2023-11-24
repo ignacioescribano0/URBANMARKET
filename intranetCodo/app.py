@@ -1,7 +1,7 @@
 #--------------------------------------------------------------------
 # Instalar con pip install Flask
-from flask import Flask, request, jsonify
-
+from flask import Flask, request, jsonify, render_template
+#from flask import request
 
 # Instalar con pip install flask-cors
 from flask_cors import CORS
@@ -9,7 +9,7 @@ from flask_cors import CORS
 # Instalar con pip install mysql-connector-python
 import mysql.connector
 
-# Si es necesario, pip install Werkzeug. Revisa los nombres que usamos para que no podamos usar nombres seguros.
+# Si es necesario, pip install Werkzeug
 from werkzeug.utils import secure_filename
 
 # No es necesario instalar, es parte del sistema standard de Python
@@ -48,12 +48,13 @@ class Catalogo:
 
         # Una vez que la base de datos está establecida, creamos la tabla si no existe
         self.cursor.execute('''CREATE TABLE IF NOT EXISTS productos (
-            codigo INT ,
+            codigo INT,
             descripcion VARCHAR(255) NOT NULL,
             cantidad INT NOT NULL,
             precio DECIMAL(10, 2) NOT NULL,
             imagen_url VARCHAR(255),
-            proveedor INT)''')
+            proveedor INT)
+                            ''')
         self.conn.commit()
 
         # Cerrar el cursor inicial y abrir uno nuevo con el parámetro dictionary=True
@@ -123,96 +124,113 @@ class Catalogo:
 # Cuerpo del programa
 #--------------------------------------------------------------------
 # Crear una instancia de la clase Catalogo
+
+
+#catalogo = Catalogo(host='arielfsp.mysql.pythonanywhere-services.com', user='arielfsp', password='1234qw12', database='arielfsp$miapp')
 catalogo = Catalogo(host='localhost', user='root', password='', database='miapp')
-catalogo.agregar_producto (1,"tele",11,34000,"tele.jpg",1)
-catalogo.agregar_producto (2,"coma",11,12000,"tele.jpg",1)
+
+
 # Carpeta para guardar las imagenes.
-ruta_destino = './static/imagenes/'
+#RUTA_DESTINO = './static/imagenes/'
+
 #--------------------------------------------------------------------
 @app.route("/productos", methods=["GET"])
 def listar_productos():
     productos = catalogo.listar_productos()
     return jsonify(productos)
 
+
 #--------------------------------------------------------------------
 @app.route("/productos/<int:codigo>", methods=["GET"])
 def mostrar_producto(codigo):
     producto = catalogo.consultar_producto(codigo)
     if producto:
-        return jsonify(producto)
+        return jsonify(producto), 201
     else:
         return "Producto no encontrado", 404
 
-#--------------------------------------------------------------------
 
+#--------------------------------------------------------------------
 @app.route("/productos", methods=["POST"])
 def agregar_producto():
+    #Recojo los datos del form
     codigo = request.form['codigo']
     descripcion = request.form['descripcion']
     cantidad = request.form['cantidad']
     precio = request.form['precio']
     proveedor = request.form['proveedor']  
-    imagen = request.files['imagen']
-    nombre_imagen = secure_filename(imagen.filename)
-    print("*"*20)
-    print(nombre_imagen)
-    print("*"*20)
-    nombre_base, extension = os.path.splitext(nombre_imagen)
-    nombre_imagen = f"{nombre_base}_{int(time.time())}{extension}"
-    imagen.save(os.path.join(ruta_destino, nombre_imagen))
+    #imagen = request.files['imagen']
+    nombre_imagen = ""
+
+    # Me aseguro que el producto exista
+    producto = catalogo.consultar_producto(codigo)
+    # if not producto: # Si no existe el producto...
+    #     # Genero el nombre de la imagen
+    #     nombre_imagen = secure_filename(imagen.filename)
+    #     nombre_base, extension = os.path.splitext(nombre_imagen)
+    #     nombre_imagen = f"{nombre_base}_{int(time.time())}{extension}"
 
     if catalogo.agregar_producto(codigo, descripcion, cantidad, precio, nombre_imagen, proveedor):
+        #imagen.save(os.path.join(RUTA_DESTINO, nombre_imagen))
         return jsonify({"mensaje": "Producto agregado"}), 201
     else:
         return jsonify({"mensaje": "Producto ya existe"}), 400
 
 #--------------------------------------------------------------------
-
 @app.route("/productos/<int:codigo>", methods=["PUT"])
 def modificar_producto(codigo):
+    #Recojo los datos del form
+    nueva_descripcion = request.form.get("descripcion")
+    nueva_cantidad = request.form.get("cantidad")
+    nuevo_precio = request.form.get("precio")
+    nuevo_proveedor = request.form.get("proveedor")
+    #imagen = request.files['imagen']
+    nombre_imagen = ""
+
     # Procesamiento de la imagen
-    imagen = request.files['imagen']
-    nombre_imagen = secure_filename(imagen.filename)
-    print("*"*20)
-    print(nombre_imagen)
-    print("*"*20)
-    nombre_base, extension = os.path.splitext(nombre_imagen)
-    nombre_imagen = f"{nombre_base}_{int(time.time())}{extension}"
-    imagen.save(os.path.join(ruta_destino, nombre_imagen))
+    # nombre_imagen = secure_filename(imagen.filename)
+    # nombre_base, extension = os.path.splitext(nombre_imagen)
+    # nombre_imagen = f"{nombre_base}_{int(time.time())}{extension}"
+    # imagen.save(os.path.join(RUTA_DESTINO, nombre_imagen))
 
-    # Datos del producto
-    data = request.form
-    nueva_descripcion = data.get("descripcion")
-    nueva_cantidad = data.get("cantidad")
-    nuevo_precio = data.get("precio")
-    nuevo_proveedor = data.get("proveedor")
+    # Busco el producto guardado
+    #producto = producto = catalogo.consultar_producto(codigo)
+    # if producto: # Si existe el producto...
+    #     imagen_vieja = producto["imagen_url"]
+    #     # Armo la ruta a la imagen
+    #     ruta_imagen = os.path.join(RUTA_DESTINO, imagen_vieja)
 
-    # Actualización del producto
+    #     # Y si existe la borro.
+    #     if os.path.exists(ruta_imagen):
+    #         os.remove(ruta_imagen)
+    
     if catalogo.modificar_producto(codigo, nueva_descripcion, nueva_cantidad, nuevo_precio, nombre_imagen, nuevo_proveedor):
         return jsonify({"mensaje": "Producto modificado"}), 200
     else:
-        return jsonify({"mensaje": "Producto no encontrado"}), 404
+        return jsonify({"mensaje": "Producto no encontrado"}), 403
 
 
 #--------------------------------------------------------------------
-
 @app.route("/productos/<int:codigo>", methods=["DELETE"])
 def eliminar_producto(codigo):
-    # Primero, obtén la información del producto para encontrar la imagen
-    producto = catalogo.consultar_producto(codigo)
-    if producto:
-        # Eliminar la imagen asociada si existe
-        ruta_imagen = os.path.join(ruta_destino, producto['imagen_url'])
-        if os.path.exists(ruta_imagen):
-            os.remove(ruta_imagen)
+    # Busco el producto guardado
+    #producto = producto = catalogo.consultar_producto(codigo)
+    # if producto: # Si existe el producto...
+    #     imagen_vieja = producto["imagen_url"]
+    #     # Armo la ruta a la imagen
+    #     ruta_imagen = os.path.join(RUTA_DESTINO, imagen_vieja)
 
-        # Luego, elimina el producto del catálogo
-        if catalogo.eliminar_producto(codigo):
-            return jsonify({"mensaje": "Producto eliminado"}), 200
-        else:
-            return jsonify({"mensaje": "Error al eliminar el producto"}), 500
+    #     # Y si existe la borro.
+    #     if os.path.exists(ruta_imagen):
+    #         os.remove(ruta_imagen)
+
+    # Luego, elimina el producto del catálogo
+    if catalogo.eliminar_producto(codigo):
+        return jsonify({"mensaje": "Producto eliminado"}), 200
     else:
-        return jsonify({"mensaje": "Producto no encontrado"}), 404
+        return jsonify({"mensaje": "Error al eliminar el producto"}), 500
+    
+
 #--------------------------------------------------------------------
 if __name__ == "__main__":
     app.run(debug=True)

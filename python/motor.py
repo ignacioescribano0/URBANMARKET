@@ -43,15 +43,8 @@ class Accesobase:
 
         # Cerrar el cursor inicial y abrir uno nuevo con el parámetro dictionary=True
         self.cursor.close()
-        #self.cursor = self.conn.cursor(dictionary=True)
-    def obtiene_coneccion(self):
-        return self.conn
+        self.cursor = self.conn.cursor(dictionary=True)
 
-class Categorias:
-    #----------------------------------------------------------------
-    # Constructor de la clase
-    def __init__(self, acceso):
-        self.cursor = acceso.cursor(dictionary=True)
     #----------------------------------------------------------------
     def consultar_categoria1(self):      
         self.cursor.execute(f"SELECT * FROM cat1")
@@ -66,72 +59,94 @@ class Categorias:
     def consultar_categoria3(self,id2):      
         self.cursor.execute(f"SELECT * FROM cat3 where id2='{id2}'")
         categorias3 = self.cursor.fetchall() 
-        #print()
-        #print("-"*50)
-        """"for categoria in categorias2:
-           print(f"Codigo     : {categoria['id']}")
-           print(f"Descripcion: {categoria['descripcion']}")
-           print(f"Codigo     : {categoria['id']}")
-           print("-"*50)     """
 
         return categorias3
     #-----------------------------------------------------------------------------------
     def consultar_categoria4(self,id3):      
         self.cursor.execute(f"SELECT * FROM cat4 where id3='{id3}'")
         categorias4 = self.cursor.fetchall() 
-        #print()
-        #print("-"*50)
-        """"for categoria in categorias2:
-           print(f"Codigo     : {categoria['id']}")
-           print(f"Descripcion: {categoria['descripcion']}")
-           print(f"Codigo     : {categoria['id']}")
-           print("-"*50)     """
-
         return categorias4
-    #------------------------------------------------------------------------------
-class Articulos:
-    # Constructor de la clase
-    def __init__(self, acceso):
-        self.cursor = acceso.cursor(dictionary=True)
-    #---------------------------------------------------------------- 
-    def listar(self,id1):
-        self.cursor.execute(f"SELECT id,descripcion FROM articulos where cat1={id1}  and id <20000 ")
+    # -----------------------------------------------------------------------------------------------------
+    def agregar_articulo(self,descripcion,descripcion_red,precio,cat1,cat2,cat3,cat4,enoferta,foto):
+    #def agregar_articulo(self, id,descripcion,descripcion_red,precio):
+
+        
+        sql = "INSERT INTO articulos (descripcion, descripcion_red,precio,cat1,cat2,cat3,cat4,enoferta,foto) VALUES (%s, %s, %s, %s, %s,%s, %s, %s, %s)"
+        #sql = "INSERT INTO articulos (id,descripcion, descripcion_red,precio) VALUES (%s,%s, %s, %s)"
+        #valores = (id,descripcion, descripcion_red, precio)
+        valores = (descripcion, descripcion_red, precio,cat1,cat2,cat3,cat4,enoferta,foto)
+        self.cursor.execute(sql, valores)        
+        self.conn.commit()
+        return True
+    # ----------------------------------------------------------------------------------------------------------
+    def listar_articulos1(self):
+        self.cursor.execute(f"SELECT id,descripcion FROM articulos where id <2000 ")
+        articulos = self.cursor.fetchall() 
+        return articulos
+    # ----------------------------------------------------------------------------------------------------------
+    def listar_articulos(self):
+        self.cursor.execute(f"SELECT id,descripcion,precio,cat1 FROM articulos where id <2000 ")
         articulos = self.cursor.fetchall() 
         return articulos
 
-
 #   Programa Principal------------------------------------------------------------------
-acceso_um = Accesobase(host='localhost', user='root', password='', database='urbanmarket')
-categorias = Categorias(acceso_um.obtiene_coneccion())
-articulos  = Articulos(acceso_um.obtiene_coneccion())
+#o_importador = Importador(host='urbanmarket.mysql.pythonanywhere-services.com', user='urbanmarket', password='codoacodo1', database='base')
+acceso_base = Accesobase(host='localhost', user='root', password='', database='urbanmarket1')
+
 
 
 # Rutas flask ----------------------------------------------------------------
 
 @app.route("/categorias/cat1", methods=["GET"])
 def listar_categoria1():
-    categoria1 = categorias.consultar_categoria1()
+    categoria1 = acceso_base.consultar_categoria1()
     return jsonify(categoria1)
 
 @app.route("/categorias/cat2/<int:codigo>", methods=["GET"])
 def listar_categoria2(codigo):
-    categoria2 = categorias.consultar_categoria2(codigo)
+    categoria2 = acceso_base.consultar_categoria2(codigo)
     return jsonify(categoria2) 
 
 @app.route("/categorias/cat3/<int:codigo>", methods=["GET"])
 def listar_categoria3(codigo):
-    categoria3 = categorias.consultar_categoria3(codigo)
+    categoria3 = acceso_base.consultar_categoria3(codigo)
     return jsonify(categoria3)
 
 @app.route("/categorias/cat4/<int:codigo>", methods=["GET"])
 def listar_categoria4(codigo):
-    categoria4 = categorias.consultar_categoria4(codigo)
+    categoria4 = acceso_base.consultar_categoria4(codigo)
     return jsonify(categoria4)
 
-@app.route("/articulos/<int:id1>", methods=["GET"])
-def listar_articulos(id1):
-    consulta_articulos = articulos.listar(id1)
+@app.route("/articulos", methods=["GET"])
+def listar_articulos():
+    consulta_articulos = acceso_base.listar_articulos()
     return jsonify(consulta_articulos)
+
+@app.route("/articulos1", methods=["GET"])
+def listar_articulos1():
+    consulta_articulos = acceso_base.listar_articulos1()
+    return jsonify(consulta_articulos)
+
+@app.route("/articulos", methods=["POST"])
+def agregar_articulo():
+    #Recojo los datos del form
+    descripcion = request.form['descripcion']
+    descripcion_red = request.form['descripcion_red']
+    cat1 = request.form['cat1']
+    cat2 = request.form['cat2']
+    cat3 = request.form['cat3']
+    cat4 = request.form['cat4']
+    precio = request.form['precio']
+    enoferta =True
+    foto =1
+    #imagen = request.files['imagen']
+    nombre_imagen = ""
+    if acceso_base.agregar_articulo( descripcion,descripcion_red,cat1,cat2,cat3,cat4, precio, enoferta, foto):
+        #imagen.save(os.path.join(RUTA_DESTINO, nombre_imagen))
+        return jsonify({"mensaje": "Producto agregado"}), 201
+    else:
+        return jsonify({"mensaje": "Producto ya existe"}), 400
+
 
 if __name__ == "__main__":
     app.run(debug=True)

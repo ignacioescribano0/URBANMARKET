@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar producto</title>
+    <link rel="stylesheet" href="./estilos/estilosIntranet.css">
+</head>
+
+<body>
+    <h1>INTRANET URBANMARKET</h1>
+    <h3>Agregar articulos</h3>
+
+    <!--enctype="multipart/form-data es necesario para enviar archivos al back.-->
+    <form id="formulario" enctype="multipart/form-data>
+        <label for="descripcion">Descripción:</label>
+        <input type="text" id="descripcion" name="codigo" required><br>
+
+        <label for="descripcion">Descripción Reducida:</label>
+        <input type="text" id="descripcion_red" name="descripcion" required><br>
+
+        <div class="container">
+            <div class="container1" >
+                <label for="cat1">Categoria 1:</label>
+                <select title="hola" id="cat1" class="selecto" name="categoria1" size="7"></select>
+            </div>
+            <br>
+            <div class="container1">
+                <label for="cat2">Categoria 2:</label>
+                <select title="hola1" id="cat2" class="selecto" name="categoria2" size="7"></select>
+            </div>
+            <br>
+            <div class="container1">
+                <label for="cat3">Categoria 3:</label>
+                <select title="hola" id="cat3" class="selecto" name="categoria3" size="7"></select>
+            </div>
+            <br>
+            <div class="container1">
+                <label for="cat4">Categoria 4:</label>
+                <select title="hola" id="cat4" class="selecto" name="categoria4" size="7"></select>
+            </div>    
+        </div>
+
+        <label for="precio">Precio:</label>
+        <input type="number" step="0.01" id="precio" name="precio" required><br>
+
+        <!--<label for="oferta">Producto Ofertado:</label>
+        <input type="number" id="oferta" name="cantidad" required><br>
+
+         <label for="imagenProducto">Imagen del producto:</label>
+        <input type="file" id="imagenProducto" name="imagen"> -->
+    
+        <button type="submit">Agregar Producto</button>
+        <a href="menuIntranet.html">Menu principal</a>
+    </form>
+
+    <script>
+        const URL = "http://127.0.0.1:5000/"
+        //const URL = "https://urbanmarket.pythonanywhere.com/"
+       // Armo browse 1
+       fetch(URL + 'categorias/cat1')
+       .then(function (response) {
+               if (response.ok) {return response.json(); }
+           })
+       .then(function (data) {
+               let selectCat1 = document.getElementById('cat1');
+               for (let categoria of data) {
+                   selectCat1.innerHTML = selectCat1.innerHTML + '<option value="' + categoria.id + '">'+ categoria.descripcion + '</option>'; 
+                   
+                   
+               }
+               selectCat1.innerHTML +='</select>';
+
+
+
+       })
+   </script>
+
+<script>
+   // Seleccion Categoria 1. Armo browse categoria 2
+   document.getElementById('cat1').addEventListener('change', function() {
+       var eleccionCat1 = document.getElementById('cat1').value;      
+       const URL = "http://127.0.0.1:5000/"
+        //const URL = "https://urbanmarket.pythonanywhere.com/"
+       // Realizamos la solicitud GET al servidor
+       fetch(URL + 'categorias/cat2/'+ eleccionCat1)
+       .then(function (response) {
+               if (response.ok) {return response.json(); }
+           })
+       .then(function (data) {
+               let selectCat2 = document.getElementById('cat2');
+               selectCat2.innerHTML = ""
+               for (let categoria of data) {
+                   selectCat2.innerHTML = selectCat2.innerHTML + '<option value="' + categoria.id + '">'+ categoria.descripcion + '</option>'; 
+                   
+                   
+               }
+               selectCat2.innerHTML +='</select>';
+
+       })
+
+       
+   });
+</script>
+<script>
+   // Seleccion Categoria 2 Armo browse categoria 3
+   document.getElementById('cat2').addEventListener('change', function() {
+       var eleccionCat2 = document.getElementById('cat2').value;
+       //document.getElementById('catSelect').textContent = eleccionCat2;
+       const URL = "http://127.0.0.1:5000/"
+       //const URL = "https://urbanmarket.pythonanywhere.com/"
+       
+       // Realizamos la solicitud GET al servidor
+       fetch(URL + 'categorias/cat3/'+ eleccionCat2)
+       .then(function (response) {
+               if (response.ok) {return response.json(); }
+           })
+       .then(function (data) {
+               let selectCat3 = document.getElementById('cat3');
+               selectCat3.innerHTML = ""
+               for (let categoria of data) {
+                   selectCat3.innerHTML = selectCat3.innerHTML + '<option value="' + categoria.id + '">'+ categoria.descripcion + '</option>'; 
+                   
+                   
+               }
+               selectCat3.innerHTML +='</select>';
+       })      
+   });
+</script>
+<script>
+   // Seleccion Categoria 3. Armo browse categoria 4
+   document.getElementById('cat3').addEventListener('change', function() {
+       var eleccionCat3 = document.getElementById('cat3').value;
+       //document.getElementById('catSelect').textContent = eleccionCat2;
+       const URL = "http://127.0.0.1:5000/"
+       //const URL = "https://urbanmarket.pythonanywhere.com/"
+       
+       // Realizamos la solicitud GET al servidor
+       fetch(URL + 'categorias/cat4/'+ eleccionCat3)
+       .then(function (response) {
+               if (response.ok) {return response.json(); }
+           })
+       .then(function (data) {
+               let selectCat4 = document.getElementById('cat4');
+               selectCat4.innerHTML = ""
+               for (let categoria of data) {
+                   selectCat4.innerHTML = selectCat4.innerHTML + '<option value="' + categoria.id + '">'+ categoria.descripcion + '</option>'; 
+                   
+                   
+               }
+               selectCat4.innerHTML +='</select>';
+       })      
+   });
+</script>
+<script>
+        
+        const URL1 = "http://127.0.0.1:5000/"
+        //const URL = "https://urbanmarket.pythonanywhere.com/"
+
+        // Capturamos el evento de envío del formulario
+        document.getElementById('formulario').addEventListener('submit', function (event) {
+            event.preventDefault(); // Evitamos que se envie el form 
+
+            var formData = new FormData();
+            formData.append('descripcion', document.getElementById('descripcion').value);
+            formData.append('descripcion_red', document.getElementById('descripcion_red').value);
+            formData.append('cat1', document.getElementById('cat1').value);
+            formData.append('cat2', document.getElementById('cat2').value);
+            formData.append('cat3', document.getElementById('cat3').value);
+            formData.append('cat4', document.getElementById('cat4').value);
+            formData.append('precio', document.getElementById('precio').value);
+            
+            //formData.append('imagen', document.getElementById('imagenProducto').files[0]);
+            
+            fetch(URL1 + 'articulos', {
+                method: 'POST',
+                body: formData // Aquí enviamos formData en lugar de JSON
+            })
+            .then(function (response) {
+                if (response.ok) { return response.json(); }
+            })
+            .then(function (data) {
+                alert('Producto agregado correctamente.');
+                // Limpiar el formulario para el proximo producto
+                document.getElementById('descripcion').value = "";
+                document.getElementById('descripcion_red').value = "";
+                document.getElementById('cat1').value = "";
+                document.getElementById('cat2').value = "";
+                document.getElementById('cat3').value = "";
+                document.getElementById('cat4').value = "";
+                //document.getElementById('imagen').value = "";
+                document.getElementById('precio').value = "";
+            })
+            .catch(function (error) {
+                // Mostramos el error, y no limpiamos el form.
+                alert('Error al agregar el producto.');
+            });
+            
+        }) 
+    </script>
+</body>
+
+</html>
