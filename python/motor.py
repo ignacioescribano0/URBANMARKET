@@ -67,13 +67,8 @@ class Accesobase:
         categorias4 = self.cursor.fetchall() 
         return categorias4
     # -----------------------------------------------------------------------------------------------------
-    def agregar_articulo(self,descripcion,descripcion_red,precio,cat1,cat2,cat3,cat4,enoferta,foto):
-    #def agregar_articulo(self, id,descripcion,descripcion_red,precio):
-
-        
+    def agregar_articulo(self,descripcion,descripcion_red,cat1,cat2,cat3,cat4,precio,enoferta,foto):
         sql = "INSERT INTO articulos (descripcion, descripcion_red,precio,cat1,cat2,cat3,cat4,enoferta,foto) VALUES (%s, %s, %s, %s, %s,%s, %s, %s, %s)"
-        #sql = "INSERT INTO articulos (id,descripcion, descripcion_red,precio) VALUES (%s,%s, %s, %s)"
-        #valores = (id,descripcion, descripcion_red, precio)
         valores = (descripcion, descripcion_red, precio,cat1,cat2,cat3,cat4,enoferta,foto)
         self.cursor.execute(sql, valores)        
         self.conn.commit()
@@ -85,7 +80,11 @@ class Accesobase:
         return articulos
     # ----------------------------------------------------------------------------------------------------------
     def listar_articulos(self):
-        self.cursor.execute(f"SELECT id,descripcion,precio,cat1 FROM articulos where id <2000 ")
+        #self.cursor.execute(f"SELECT id,descripcion,precio,cat1 FROM articulos where id <2000 ")
+        #self.cursor.execute(f"select a.id, a.descripcion,precio,c1.descripcion as desc1,c2.descripcion as desc2
+        #    from articulos as a , cat1 as c1,cat2 as c2
+        #    where a.cat1 = c1.id and c2.id1 = c1.id")
+        self.cursor.execute(f"select a.id as id, a.descripcion as descripcion,precio,c1.descripcion as ca1,c2.descripcion as ca2 from articulos as a , cat1 as c1,cat2 as c2 where a.cat1 = c1.id and c2.id1 = c1.id  and a.cat2= c2.id and a.cat1 =c1.id")
         articulos = self.cursor.fetchall() 
         return articulos
 
@@ -137,7 +136,7 @@ def agregar_articulo():
     cat3 = request.form['cat3']
     cat4 = request.form['cat4']
     precio = request.form['precio']
-    enoferta =True
+    enoferta =False
     foto =1
     #imagen = request.files['imagen']
     nombre_imagen = ""
