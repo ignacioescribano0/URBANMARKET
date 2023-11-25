@@ -46,7 +46,7 @@
         <label for="precio">Precio:</label>
         <input type="number" step="0.01" id="precio" name="precio" required><br>
 
-        <label class="formulario__label"></label>  Producto de oferta? </label>
+        <label ></label>  Producto de oferta? </label>
         <input  type="radio" name="opcionOferta" id="chkSi">Si
                 
         <input  type="radio" name="opcionOferta" checked id="chkNo">No
@@ -206,6 +206,7 @@
             formData.append('cat4', document.getElementById('cat4').value);
             formData.append('precio', document.getElementById('precio').value);
             formData.append('oferta', document.getElementById('chkSi').checked); 
+            formData.append('imagen', document.getElementById('imagenProducto').files[0]);
             
             //formData.append('imagen', document.getElementById('imagenProducto').files[0]);
             

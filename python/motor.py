@@ -7,6 +7,13 @@ from flask_cors import CORS
 
 # Instalar con pip install mysql-connector-python
 import mysql.connector
+
+# Si es necesario, pip install Werkzeug
+from werkzeug.utils import secure_filename
+
+# No es necesario instalar, es parte del sistema standard de Python
+import os
+import time
 #----------------------------------------------------------------------------------
 
 app = Flask(__name__)
@@ -89,6 +96,8 @@ class Accesobase:
         return articulos
 
 #   Programa Principal------------------------------------------------------------------
+RUTA_DESTINO = './static/imagenes/'
+
 #o_importador = Importador(host='urbanmarket.mysql.pythonanywhere-services.com', user='urbanmarket', password='codoacodo1', database='base')
 acceso_base = Accesobase(host='localhost', user='root', password='', database='urbanmarket1')
 
@@ -137,15 +146,21 @@ def agregar_articulo():
     cat4 = request.form['cat4']
     precio = request.form['precio']
     oferta = request.form['oferta']
+    imagen = request.files['imagen']
+    nombre_imagen = ""
+    # Genero el nombre de la imagen
+    nombre_imagen = secure_filename(imagen.filename)
+    nombre_base, extension = os.path.splitext(nombre_imagen)
+    nombre_imagen = f"{nombre_base}_{int(time.time())}{extension}"
     
 
     if oferta == "true":
-         oferta = True
+        oferta = True
     else: 
         oferta = False 
 
     foto =1
-    #imagen = request.files['imagen']
+    
     nombre_imagen = ""
     if acceso_base.agregar_articulo( descripcion,descripcion_red,cat1,cat2,cat3,cat4, precio, oferta, foto):
         #imagen.save(os.path.join(RUTA_DESTINO, nombre_imagen))
