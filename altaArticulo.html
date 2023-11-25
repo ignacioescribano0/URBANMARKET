@@ -46,17 +46,50 @@
         <label for="precio">Precio:</label>
         <input type="number" step="0.01" id="precio" name="precio" required><br>
 
-        <!--<label for="oferta">Producto Ofertado:</label>
-        <input type="number" id="oferta" name="cantidad" required><br>
-
-         <label for="imagenProducto">Imagen del producto:</label>
-        <input type="file" id="imagenProducto" name="imagen"> -->
-    
+        <label class="formulario__label"></label>  Producto de oferta? </label>
+        <input  type="radio" name="opcionOferta" id="chkSi">Si
+                
+        <input  type="radio" name="opcionOferta" checked id="chkNo">No
+                
+        <br>
+        <br>
+        
+        <label for="imagenProducto">Imagen del producto:</label>
+        <input type="file" id="imagenProducto" name="imagen"> 
+        <br>
+        <img id="selectedImage" hidden  alt="" style="max-width: 100%; max-height: 200px;" >
+        <br>
+        <br>
         <button type="submit">Agregar Producto</button>
         <a href="menuIntranet.html">Menu principal</a>
     </form>
 
     <script>
+ // Get the file input element
+        var fileInput = document.getElementById('imagenProducto');
+        var selectedImage = document.getElementById('selectedImage');
+        fileInput.addEventListener('change', handleFile);
+        var reader = new FileReader();
+
+        function handleFile() 
+        {
+            // Your script to be executed when a file is selected
+            if (fileInput.files.length > 0)
+            {
+                var fileName = fileInput.files[0].name;
+                //alert('Selected File: ' + fileName);       
+            }
+        
+            reader.onload = function (e)
+            {
+                // Set the data URL as the source of the image element
+                selectedImage.src = e.target.result;
+                selectedImage.hidden = false;
+            }
+            reader.readAsDataURL(fileInput.files[0]);
+        
+        }
+
         const URL = "http://127.0.0.1:5000/"
         //const URL = "https://urbanmarket.pythonanywhere.com/"
        // Armo browse 1
@@ -160,7 +193,8 @@
         //const URL = "https://urbanmarket.pythonanywhere.com/"
 
         // Capturamos el evento de envío del formulario
-        document.getElementById('formulario').addEventListener('submit', function (event) {
+        document.getElementById('formulario').addEventListener('submit', function (event)
+        {
             event.preventDefault(); // Evitamos que se envie el form 
 
             var formData = new FormData();
@@ -171,6 +205,7 @@
             formData.append('cat3', document.getElementById('cat3').value);
             formData.append('cat4', document.getElementById('cat4').value);
             formData.append('precio', document.getElementById('precio').value);
+            formData.append('oferta', document.getElementById('chkSi').checked); 
             
             //formData.append('imagen', document.getElementById('imagenProducto').files[0]);
             
@@ -190,12 +225,14 @@
                 document.getElementById('cat2').value = "";
                 document.getElementById('cat3').value = "";
                 document.getElementById('cat4').value = "";
-                //document.getElementById('imagen').value = "";
+                document.getElementById('imagenProducto').value = "";
                 document.getElementById('precio').value = "";
                 document.getElementById('cat2').innerHTML ="";
                 document.getElementById('cat3').innerHTML ="";
                 document.getElementById('cat4').innerHTML ="";
-              
+                document.getElementById('chkNo').checked =true; 
+                document.getElementById('selectedImage').src ="";
+                document.getElementById('selectedImage').hidden =true;           
             })
             .catch(function (error) {
                 // Mostramos el error, y no limpiamos el form.
