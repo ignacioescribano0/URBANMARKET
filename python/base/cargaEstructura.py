@@ -139,8 +139,8 @@ class Importador:
 #--------------------------------------------------------------------
 # Crear una instancia de la clase Catalogo
 
-o_importador = Importador(host='localhost', user='root', password='', database='urbanmarket1')
-#o_importador = Importador(host='urbanmarket.mysql.pythonanywhere-services.com', user='urbanmarket', password='codoacodo1', database='base')
+#o_importador = Importador(host='localhost', user='root', password='', database='urbanmarket1')
+o_importador = Importador(host='urbanmarket.mysql.pythonanywhere-services.com', user='urbanmarket', password='codoacodo1', database='urbanmarket$base')
 
 
 o_importador.agregar_tabla_cat1()

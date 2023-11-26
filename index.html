@@ -189,6 +189,18 @@
 
 
 </main>   
+<script>
+    var ubicacion ="remoto"   //remoto o local
+    if (ubicacion == "remoto")
+    {
+        localStorage.setItem('ubicacionFlask','https://urbanmarket.pythonanywhere.com');
+    } 
+    else
+    {
+        localStorage.setItem('ubicacionFlask','http://127.0.0.1:5000');
+    }
+    
+</script>
 </body>   
 </html> 
 

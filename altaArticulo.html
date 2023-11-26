@@ -65,11 +65,16 @@
     </form>
 
     <script>
- // Get the file input element
+
+        var ubicacionFlask = localStorage.getItem('ubicacionFlask');
+
+        // Get the file input element
         var fileInput = document.getElementById('imagenProducto');
         var selectedImage = document.getElementById('selectedImage');
         fileInput.addEventListener('change', handleFile);
         var reader = new FileReader();
+
+
 
         function handleFile() 
         {
@@ -89,64 +94,51 @@
             reader.readAsDataURL(fileInput.files[0]);
         
         }
-
-        const URL = "http://127.0.0.1:5000/"
-        //const URL = "https://urbanmarket.pythonanywhere.com/"
        // Armo browse 1
-       fetch(URL + 'categorias/cat1')
-       .then(function (response) {
-               if (response.ok) {return response.json(); }
-           })
-       .then(function (data) {
-               let selectCat1 = document.getElementById('cat1');
-               for (let categoria of data) {
-                   selectCat1.innerHTML = selectCat1.innerHTML + '<option value="' + categoria.id + '">'+ categoria.descripcion + '</option>'; 
-                   
-                   
-               }
-               selectCat1.innerHTML +='</select>';
-
-
-
-       })
-   </script>
+        fetch(ubicacionFlask + '/categorias/cat1')
+        .then(function (response) {
+                if (response.ok) {return response.json(); }
+            })
+        .then(function (data) {
+                let selectCat1 = document.getElementById('cat1');
+                for (let categoria of data) {
+                    selectCat1.innerHTML = selectCat1.innerHTML + '<option value="' + categoria.id + '">'+ categoria.descripcion + '</option>'; 
+                    
+                    
+                }
+                selectCat1.innerHTML +='</select>';
+        })
+    </script>
 
 <script>
    // Seleccion Categoria 1. Armo browse categoria 2
-   document.getElementById('cat1').addEventListener('change', function() {
-       var eleccionCat1 = document.getElementById('cat1').value;      
-       const URL = "http://127.0.0.1:5000/"
-        //const URL = "https://urbanmarket.pythonanywhere.com/"
+    document.getElementById('cat1').addEventListener('change', function() 
+    {
+        var eleccionCat1 = document.getElementById('cat1').value;      
        // Realizamos la solicitud GET al servidor
-       fetch(URL + 'categorias/cat2/'+ eleccionCat1)
-       .then(function (response) {
-               if (response.ok) {return response.json(); }
-           })
-       .then(function (data) {
-               let selectCat2 = document.getElementById('cat2');
-               selectCat2.innerHTML = ""
-               for (let categoria of data) {
-                   selectCat2.innerHTML = selectCat2.innerHTML + '<option value="' + categoria.id + '">'+ categoria.descripcion + '</option>'; 
-                   
-                   
-               }
-               selectCat2.innerHTML +='</select>';
-
-       })
-
-       
-   });
+        fetch(ubicacionFlask  + '/categorias/cat2/'+ eleccionCat1)
+        .then(function (response) 
+        {
+            if (response.ok) {return response.json(); }
+        })
+        .then(function (data) 
+        {
+            let selectCat2 = document.getElementById('cat2');
+            selectCat2.innerHTML = ""
+            for (let categoria of data) {
+                selectCat2.innerHTML = selectCat2.innerHTML + '<option value="' + categoria.id + '">'+ categoria.descripcion + '</option>'; 
+            }
+            selectCat2.innerHTML +='</select>';
+        })       
+    });
 </script>
 <script>
    // Seleccion Categoria 2 Armo browse categoria 3
    document.getElementById('cat2').addEventListener('change', function() {
-       var eleccionCat2 = document.getElementById('cat2').value;
+        var eleccionCat2 = document.getElementById('cat2').value;
        //document.getElementById('catSelect').textContent = eleccionCat2;
-       const URL = "http://127.0.0.1:5000/"
-       //const URL = "https://urbanmarket.pythonanywhere.com/"
-       
        // Realizamos la solicitud GET al servidor
-       fetch(URL + 'categorias/cat3/'+ eleccionCat2)
+       fetch(ubicacionFlask + '/categorias/cat3/'+ eleccionCat2)
        .then(function (response) {
                if (response.ok) {return response.json(); }
            })
@@ -154,9 +146,7 @@
                let selectCat3 = document.getElementById('cat3');
                selectCat3.innerHTML = ""
                for (let categoria of data) {
-                   selectCat3.innerHTML = selectCat3.innerHTML + '<option value="' + categoria.id + '">'+ categoria.descripcion + '</option>'; 
-                   
-                   
+                   selectCat3.innerHTML = selectCat3.innerHTML + '<option value="' + categoria.id + '">'+ categoria.descripcion + '</option>';                    
                }
                selectCat3.innerHTML +='</select>';
        })      
@@ -167,11 +157,8 @@
    document.getElementById('cat3').addEventListener('change', function() {
        var eleccionCat3 = document.getElementById('cat3').value;
        //document.getElementById('catSelect').textContent = eleccionCat2;
-       const URL = "http://127.0.0.1:5000/"
-       //const URL = "https://urbanmarket.pythonanywhere.com/"
-       
        // Realizamos la solicitud GET al servidor
-       fetch(URL + 'categorias/cat4/'+ eleccionCat3)
+       fetch(ubicacionFlask + '/categorias/cat4/'+ eleccionCat3)
        .then(function (response) {
                if (response.ok) {return response.json(); }
            })
@@ -179,19 +166,13 @@
                let selectCat4 = document.getElementById('cat4');
                selectCat4.innerHTML = ""
                for (let categoria of data) {
-                   selectCat4.innerHTML = selectCat4.innerHTML + '<option value="' + categoria.id + '">'+ categoria.descripcion + '</option>'; 
-                   
-                   
+                   selectCat4.innerHTML = selectCat4.innerHTML + '<option value="' + categoria.id + '">'+ categoria.descripcion + '</option>';                   
                }
                selectCat4.innerHTML +='</select>';
        })      
    });
 </script>
 <script>
-        
-        const URL1 = "http://127.0.0.1:5000/"
-        //const URL = "https://urbanmarket.pythonanywhere.com/"
-
         // Capturamos el evento de envío del formulario
         document.getElementById('formulario').addEventListener('submit', function (event)
         {
@@ -210,7 +191,7 @@
             
             //formData.append('imagen', document.getElementById('imagenProducto').files[0]);
             
-            fetch(URL1 + 'articulos', {
+            fetch(ubicacionFlask + '/articulos', {
                 method: 'POST',
                 body: formData // Aquí enviamos formData en lugar de JSON
             })

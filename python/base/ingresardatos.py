@@ -69,9 +69,8 @@ class Importador:
 # Cuerpo del programa
 #--------------------------------------------------------------------
 # Crear una instancia de la clase Catalogo
-o_importador = Importador(host='localhost', user='root', password='', database='urbanmarket1')
-#catalogo = Catalogo(host='localhost', user='root', password='', database='miapp')
-#catalogo = Catalogo(host='ignacioe.mysql.pythonanywhere-services.com', user='ignacioe', password='peluchin', database='ignacioe$trabajo')
+#o_importador = Importador(host='localhost', user='root', password='', database='urbanmarket1')
+o_importador = Importador(host='urbanmarket.mysql.pythonanywhere-services.com', user='urbanmarket', password='codoacodo1', database='urbanmarket$base')
 
 o_importador.agregar_empleado("Ignacio Escribano","ignacioe", "codo")
 o_importador.agregar_empleado("Pablo Saenz Brione","pablos", "codo")

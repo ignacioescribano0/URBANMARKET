@@ -98,7 +98,7 @@ class Accesobase:
 #   Programa Principal------------------------------------------------------------------
 RUTA_DESTINO = './static/imagenes/'
 
-#o_importador = Importador(host='urbanmarket.mysql.pythonanywhere-services.com', user='urbanmarket', password='codoacodo1', database='base')
+#o_importador = Accesobase(host='urbanmarket.mysql.pythonanywhere-services.com', user='urbanmarket', password='codoacodo1', database='urbanmarket$base')
 acceso_base = Accesobase(host='localhost', user='root', password='', database='urbanmarket1')
 
 
