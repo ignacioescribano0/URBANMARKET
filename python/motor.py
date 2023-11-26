@@ -138,6 +138,7 @@ def listar_articulos1():
 @app.route("/articulos", methods=["POST"])
 def agregar_articulo():
     #Recojo los datos del form
+    nombre_imagen=""
     descripcion = request.form['descripcion']
     descripcion_red = request.form['descripcion_red']
     cat1 = request.form['cat1']
@@ -147,7 +148,6 @@ def agregar_articulo():
     precio = request.form['precio']
     oferta = request.form['oferta']
     imagen = request.files['imagen']
-    nombre_imagen = ""
     # Genero el nombre de la imagen
     nombre_imagen = secure_filename(imagen.filename)
     nombre_base, extension = os.path.splitext(nombre_imagen)
@@ -159,11 +159,8 @@ def agregar_articulo():
     else: 
         oferta = False 
 
-    foto =1
-    
-    nombre_imagen = ""
-    if acceso_base.agregar_articulo( descripcion,descripcion_red,cat1,cat2,cat3,cat4, precio, oferta, foto):
-        #imagen.save(os.path.join(RUTA_DESTINO, nombre_imagen))
+    if acceso_base.agregar_articulo( descripcion,descripcion_red,cat1,cat2,cat3,cat4, precio, oferta, nombre_imagen):
+        imagen.save(os.path.join(RUTA_DESTINO, nombre_imagen))
         return jsonify({"mensaje": "Producto agregado"}), 201
     else:
         return jsonify({"mensaje": "Producto ya existe"}), 400
