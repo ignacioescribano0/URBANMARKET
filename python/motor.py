@@ -26,79 +26,90 @@ CORS(app)  # Esto habilitará CORS para todas las rutas
 #--------------------------------------------------------------------
 class Accesobase:
     #----------------------------------------------------------------
+    
     # Constructor de la clase
     def __init__(self, host, user, password, database):
         # Primero, establecemos una conexión sin especificar la base de datos
-        self.conn = mysql.connector.connect(
-            host=host,
-            user=user,
-            password=password
-        )
-        self.cursor = self.conn.cursor()
-
+        self.host =host
+        self.user = user
+        self.password=password
+        self.database=database
+        self.prepara_base()        
         # Intentamos seleccionar la base de datos
         try:
             self.cursor.execute(f"USE {database}")
         except mysql.connector.Error as err:
-            # Si la base de datos no existe, la creamos
-            if err.errno == mysql.connector.errorcode.ER_BAD_DB_ERROR:
-                self.cursor.execute(f"CREATE DATABASE {database}")
-                self.conn.database = database
-            else:
-                raise err
-            
-
-        # Cerrar el cursor inicial y abrir uno nuevo con el parámetro dictionary=True
-        self.cursor.close()
-        self.cursor = self.conn.cursor(dictionary=True)
-
+            raise err
+        
+        self.limpia_base()       
     #----------------------------------------------------------------
-    def consultar_categoria1(self):      
+    def prepara_base(self):
+        self.conexion = mysql.connector.connect(host=self.host,user=self.user,password=self.password)
+        self.cursor = self.conexion.cursor(dictionary=True)
+        try:
+            self.cursor.execute(f"USE {self.database}")
+        except mysql.connector.Error as err:
+            raise err
+    
+    def limpia_base(self):
+        self.cursor.close()
+        self.conexion.close()
+    #-----------------------------------------------------------------------------
+    def consultar_categoria1(self): 
+        self.prepara_base()    
         self.cursor.execute(f"SELECT * FROM cat1")
         categorias1 = self.cursor.fetchall() 
+        self.limpia_base()
         return categorias1
     #----------------------------------------------------------------
-    def consultar_categoria2(self,id1):      
+    def consultar_categoria2(self,id1): 
+        self.prepara_base()     
         self.cursor.execute(f"SELECT * FROM cat2 where id1='{id1}'")
         categorias2 = self.cursor.fetchall() 
+        self.limpia_base()
         return categorias2
     #-------------------------------------------------------------------
-    def consultar_categoria3(self,id2):      
+    def consultar_categoria3(self,id2):
+        self.prepara_base()   
         self.cursor.execute(f"SELECT * FROM cat3 where id2='{id2}'")
         categorias3 = self.cursor.fetchall() 
-
+        self.limpia_base()
         return categorias3
     #-----------------------------------------------------------------------------------
     def consultar_categoria4(self,id3):      
+        self.prepara_base()
         self.cursor.execute(f"SELECT * FROM cat4 where id3='{id3}'")
         categorias4 = self.cursor.fetchall() 
+        self.limpia_base()
         return categorias4
     # -----------------------------------------------------------------------------------------------------
     def agregar_articulo(self,descripcion,descripcion_red,cat1,cat2,cat3,cat4,precio,enoferta,foto):
+        self.prepara_base()
         sql = "INSERT INTO articulos (descripcion, descripcion_red,precio,cat1,cat2,cat3,cat4,enoferta,foto) VALUES (%s, %s, %s, %s, %s,%s, %s, %s, %s)"
         valores = (descripcion, descripcion_red, precio,cat1,cat2,cat3,cat4,enoferta,foto)
         self.cursor.execute(sql, valores)        
-        self.conn.commit()
+        self.conexion.commit()
+        self.limpia_base()
         return True
     # ----------------------------------------------------------------------------------------------------------
     def listar_articulos1(self):
+        self.prepara_base()
         self.cursor.execute(f"SELECT id,descripcion FROM articulos where id <2000 ")
         articulos = self.cursor.fetchall() 
+        self.limpia_base()
         return articulos
     # ----------------------------------------------------------------------------------------------------------
     def listar_articulos(self):
-        #self.cursor.execute(f"SELECT id,descripcion,precio,cat1 FROM articulos where id <2000 ")
-        #self.cursor.execute(f"select a.id, a.descripcion,precio,c1.descripcion as desc1,c2.descripcion as desc2
-        #    from articulos as a , cat1 as c1,cat2 as c2
-        #    where a.cat1 = c1.id and c2.id1 = c1.id")
+        self.prepara_base()
         self.cursor.execute(f"select a.id as id, a.descripcion as descripcion,precio,c1.descripcion as ca1,c2.descripcion as ca2 from articulos as a , cat1 as c1,cat2 as c2 where a.cat1 = c1.id and c2.id1 = c1.id  and a.cat2= c2.id and a.cat1 =c1.id")
         articulos = self.cursor.fetchall() 
+        self.limpia_base()
         return articulos
 
 #   Programa Principal------------------------------------------------------------------
 RUTA_DESTINO = './static/imagenes/'
 
-#o_importador = Accesobase(host='urbanmarket.mysql.pythonanywhere-services.com', user='urbanmarket', password='codoacodo1', database='urbanmarket$base')
+#acceso_base = Accesobase(host='urbanmarket.mysql.pythonanywhere-services.com', user='urbanmarket', password='codoacodo1', database='urbanmarket$base')
 acceso_base = Accesobase(host='localhost', user='root', password='', database='urbanmarket1')
 
 
