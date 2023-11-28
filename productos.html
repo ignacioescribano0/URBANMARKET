@@ -70,103 +70,10 @@
 
 <div class="contenedor_productos">  
    <h2> NUESTROS PRODUCTOS </h2>
-   <div class="listas_productos">
-      <div class="productos">
-         <img src="imagenes/productos/productos_1.webp" alt="">
-         <h3>Mayonesa Clásica Hellmann's</h3>
-         <div class="price">$850.00</div>
-          <div class="boton">
-         <a href="#" class="carrito">Agregar al carrito</a>
-         </div>
-      </div>
-      <div class="productos">
-         <img src="imagenes/productos/productos_2.webp" alt="">
-         <h3>Limpiador Crem. CIF Blanco</h3>
-         <div class="price">$629.00</div>
-         <div class="boton">
-        <a href="#" class="carrito">Agregar al carrito</a>
-        </div>
-      </div>
-      <div class="productos">
-         <img src="imagenes/productos/productos_3.webp" alt="">
-         <h3>Aceite Cocinero Girasol 1500cc</h3>
-         <div class="price">$2643.00</div>
-          <div class="boton">
-         <a href="#" class="carrito">Agregar al carrito</a>
-         </div>
-      </div>
-      <div class="productos">
-         <img src="imagenes/productos/productos_4.webp" alt="">
-         <h3>Ketchup Hellmanns 500 GR.</h3>
-         <div class="price">$426.00</div>
-          <div class="boton">
-         <a href="#" class="carrito">Agregar al carrito</a>
-        </div>
-      </div>
-      <div class="productos">
-         <img src="imagenes/productos/productos_5.webp" alt="">
-         <h3>Arroz Gallo Oro 5kg</h3>
-         <div class="price">$569.00</div>
-          <div class="boton">
-         <a href="#" class="carrito">Agregar al carrito</a>
-        </div>
-      </div>
-      <div class="productos">
-         <img src="imagenes/productos/productos_6.webp" alt="">
-         <h3>Shampoo Pantene CLAS.X 400 ML.</h3>
-         <div class="price">$650.00</div>
-          <div class="boton">
-         <a href="#" class="carrito">Agregar al carrito</a>
-        </div>
-      </div>
-      <div class="productos">
-        <img src="imagenes/productos/productos_7.webp" alt="">
-        <h3>Scott 4Un x30M</h3>
-        <div class="precio">$680.00</div>
-         <div class="boton">
-        <a href="#" class="carrito">Agregar al carrito</a>
-       </div>
-     </div>
-     <div class="productos">
-        <img src="imagenes/productos/productos_8.webp" alt="">
-        <h3>Cacao Nesquik 800G</h3>
-        <div class="price">$1290.00</div>
-         <div class="boton">
-        <a href="#" class="carrito">Agregar al carrito</a>
-       </div>
-     </div>
-     <div class="productos">
-        <img src="imagenes/productos/productos_9.webp" alt="">
-        <h3>Gelatina Exquisita 50 g</h3>
-        <div class="price">$450.00</div>
-         <div class="boton">
-        <a href="#" class="carrito">Agregar al carrito</a>
-       </div>
-     </div>
-     <div class="productos">
-        <img src="imagenes/productos/productos_10.webp" alt="">
-        <h3>Bizcochuelo Exquisita 540g</h3>
-        <div class="price">$490.00</div>
-         <div class="boton">
-        <a href="#" class="carrito">Agregar al carrito</a>
-       </div>
-     </div>
-     <div class="productos">
-        <img src="imagenes/productos/productos_11.webp" alt="">
-        <h3>Mermelada BC 390 g.</h3>
-        <div class="price">$900.00</div>
-         <div class="boton">
-        <a href="#" class="carrito">Agregar al carrito</a>
-       </div>
-     </div>
-     <div class="productos">
-        <img src="imagenes/productos/productos_12.webp" alt="">
-        <h3>Alimento DOGUI 1.5Kgr </h3>
-        <div class="price">$2290.00</div>
-         <div class="boton">
-        <a href="#" class="carrito">Agregar al carrito</a>
-       </div>
-     </div>
+   <div id="productos" class="listas_productos">
+      
+      
+
    </div>
 </div>
 
@@ -229,6 +136,32 @@
     </footer>
 
 </main>
+      
+<script>
+        
+        var ubicacionFlask = localStorage.getItem('ubicacionFlask');
+        let listaProductos = document.getElementById('productos');
+        listaProductos.innerHTML = '';
+                // Realizamos la solicitud GET al servidor para obtener todos los productos
+        fetch(ubicacionFlask + '/articulos/clientes')
+        .then(function (response) {
+           if (response.ok) {return response.json(); }
+        })
+
+        .then(function (data) {
+           // Iteramos sobre los productos y agregamos filas a la tabla
+           for (let producto of data) {            
+            listaProductos.innerHTML += '<div id = "producto" class="productos"> <img src="static/imagenes/'+ producto.foto + '" alt=""> <h3>' + producto.descripcion + '</h3> <div class="price">$' + producto.precio + '</div> <div class="boton"> <a href="#" class="carrito">Agregar al carrito</a> </div></div>';
+           }
+        })
+        .catch(function (error) {
+           // Código para manejar errores
+           alert('Error al obtener los productos.');
+       })
+
+
+</script>
+
 </body>   
 </html> 
 

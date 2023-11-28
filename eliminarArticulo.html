@@ -7,6 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado de Productos</title>
     <link rel="stylesheet" href="estilos/estilosIntranet.css">>
+    <script>
+        var empleado = sessionStorage.getItem('empleado');
+        var modoDebug = sessionStorage.getItem('modoDebug');
+
+        if (!(modoDebug=="activado") && empleado == null ){window.location.href = "index.html";}
+        
+    </script>
 </head>
 
 <body>

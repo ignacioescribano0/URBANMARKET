@@ -50,7 +50,7 @@
                          <li><a href="productos.html">PRODUCTOS</a></li> 
                          <li><a href="contacto.html">CONTACTO    </a> </li>
                          <li> <a href="intranetCodo/index.html" >INTRANET CODO </a> </li>
-                         <li> <a href="menuIntranet.html" >INTRANET </a> </li>
+                         <li> <a href="loginIntranet.html" >INTRANET </a> </li>
                      </ul>
                 </nav>
             </div>
@@ -190,16 +190,21 @@
 
 </main>   
 <script>
-    var ubicacion ="remoto"   //remoto o local
-    if (ubicacion == "remoto")
+    var servidorRemoto  = false;   //remoto o local
+    var modoDebug       = "activado"; // valor activado o vacio(""):  no hace ciertas cosas para no trabar al desarrollador.Ejemplo no pide login
+
+    if (servidorRemoto == true)
     {
-        localStorage.setItem('ubicacionFlask','https://urbanmarket.pythonanywhere.com');
+        sessionStorage.setItem('ubicacionFlask','https://urbanmarket.pythonanywhere.com');
     } 
     else
     {
-        localStorage.setItem('ubicacionFlask','http://127.0.0.1:5000');
+        sessionStorage.setItem('ubicacionFlask','http://127.0.0.1:5000');
     }
     
+    sessionStorage.setItem('modoDebug',modoDebug);
+  
+
 </script>
 </body>   
 </html> 

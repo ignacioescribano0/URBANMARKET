@@ -105,6 +105,22 @@ class Accesobase:
         articulos = self.cursor.fetchall() 
         self.limpia_base()
         return articulos
+    # ----------------------------------------------------------------------------------------------------------
+    def login(self,usuario,password):
+        self.prepara_base()
+        self.cursor.execute(f"select nombre from empleados where usuario='{usuario}' and password='{password}'")
+        empleados = self.cursor.fetchall() 
+        self.limpia_base()
+        return empleados
+    
+    # ----------------------------------------------------------------------------------------------------------
+    def listar_articulos_para_clientes(self):
+        self.prepara_base()
+        self.cursor.execute("SELECT id,descripcion,precio,foto,enoferta FROM articulos")
+        articulos = self.cursor.fetchall() 
+        self.limpia_base()
+        return articulos
+    # ----------------------------------------------------------------------------------------------------------
 
 #   Programa Principal------------------------------------------------------------------
 RUTA_DESTINO = './static/imagenes/'
@@ -175,7 +191,24 @@ def agregar_articulo():
         return jsonify({"mensaje": "Producto agregado"}), 201
     else:
         return jsonify({"mensaje": "Producto ya existe"}), 400
+    
 
+@app.route("/login", methods=["POST"])
+def login():
+    usuario = request.form['usuario']
+    contrasena = request.form['contrasena']
+    consulta_empleados=acceso_base.login(usuario,contrasena)
+    #print(f"{usuario} : {contrasena}")
+    if len(consulta_empleados) > 0:
+        return jsonify({"mensaje": "login exitoso"}), 201
+    else:
+         return jsonify({"mensaje": "No se encontro la combinacion usuario/password"}), 201
+    
+@app.route("/articulos/clientes", methods=["GET"])
+def listar_articulos_para_clientes():
+    consulta_articulos = acceso_base.listar_articulos_para_clientes()
+    return jsonify(consulta_articulos)
+        
 
 if __name__ == "__main__":
     app.run(debug=True)

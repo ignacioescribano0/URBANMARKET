@@ -6,9 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejemplo de uso de la API</title>
     <link rel="stylesheet" href="estilos/estilosintranet.css">
+    <script>
+        var empleado = sessionStorage.getItem('empleado');
+        var modoDebug = sessionStorage.getItem('modoDebug');
+
+        if (!(modoDebug=="activado") && empleado == null ){window.location.href = "index.html";}
+        
+    </script>
 </head>
 
 <body>
+
+  
     <div>
         <h1>INTRANET URBANMARKET</h1>
         <h3>MENU</h3>
