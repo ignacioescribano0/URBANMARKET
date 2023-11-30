@@ -51,19 +51,31 @@
         </div> 
     </header>
 
-    <div class="contenedor_ofertas">     
+  
+    <section class="contenedor_ofertas">    
         <h2> Ofertas destacadas </h2>
-        <div id="productosOferta" class="listas_productos">     
+    <div class="ofertas">
+        <div class="ofertas_imagenes">
+             <img class="ofertas_1" src="imagenes/Ofertas_1.webp">
+        </div>
+        <div>
+            <img class="ofertas_1" src="imagenes/Ofertas_2.webp">
+        </div>
+        <div>
+            <img class="ofertas_1" src="imagenes/Ofertas_3.webp">
         </div>
     </div>
-    <div class="contenedor_productos">     
-        <h2> Nuestros Productos </h2>
-        <div id="productos" class="listas_productos">     
-        </div>
-    </div>
+    <p class="ofertas_vencimiento"><i>Ofertas destacadas desde el 01/10/2023 al 31/10/2023</i></p>
+    </section>
 
+<div class="contenedor_productos">  
+   <h2> NUESTROS PRODUCTOS </h2>
+   <div id="productos" class="listas_productos">
+      
+      
 
-
+   </div>
+</div>
 
   
     <footer class="footer"> 
@@ -128,37 +140,8 @@
 <script>
         
         var ubicacionFlask = localStorage.getItem('ubicacionFlask');
-        /*PRODUCTOS OFERTA*/
-        let listaProductosOferta = document.getElementById('productosOferta');
-        listaProductosOferta.innerHTML = '';
-                // Realizamos la solicitud GET al servidor para obtener todos los productos
-        fetch(ubicacionFlask + '/articulos/clientes')
-        .then(function (response) {
-           if (response.ok) {return response.json(); }
-        })
-
-        .then(function (data) {
-           // Iteramos sobre los productos y agregamos filas a la tabla
-           for (let producto of data) {  
-            if (producto.enoferta ==1 ){         
-            listaProductosOferta.innerHTML += '<div id = "producto" class="productos"> <img src="static/imagenes/'+ producto.foto + '" > <h4 style="height:10vh;">' + producto.descripcion + '</h4> <div class="price"><strong>$' + producto.precio + '</strong> </div> <br><div> <img class="offer-badge" src="static/imagenes/cartelOferta.png"></div><br> <div class="boton"> <a href="#" class="carrito">Agregar al carrito</a> </div> </div>';
-            }
-            else
-            {         
-            listaProductosOferta.innerHTML += '<div id = "producto" class="productos"> <img src="static/imagenes/'+ producto.foto + '" > <h3 style="height:10vh;">' + producto.descripcion + '</h3> <div class="price">$' + producto.precio + '</div><div> <img class="offer-badge" src="static/imagenes/cartelOfertaTra.png"></div> <div class="boton"> <a href="#" class="carrito">Agregar al carrito</a> </div> </div>';
-            
-            }
-
-
-           }
-        })
-        .catch(function (error) {
-           // Código para manejar errores
-           alert('Error al obtener los productos.');
-       })
-    /*PRODUCTOS DEL CATALOGO*/
-       let listaProductos = document.getElementById('productos');
-        listaProductosOferta.innerHTML = '';
+        let listaProductos = document.getElementById('productos');
+        listaProductos.innerHTML = '';
                 // Realizamos la solicitud GET al servidor para obtener todos los productos
         fetch(ubicacionFlask + '/articulos/clientes')
         .then(function (response) {
@@ -168,13 +151,14 @@
         .then(function (data) {
            // Iteramos sobre los productos y agregamos filas a la tabla
            for (let producto of data) {            
-            listaProductos.innerHTML += '<div id = "producto" class="productos"> <img src="static/imagenes/'+ producto.foto + '" > <h3 style="height:10vh;">' + producto.descripcion + '</h3> <div class="price"><strong>$' + producto.precio + '</strong> </div> <br><div> <img class="offer-badge" src="static/imagenes/cartelOferta.png"></div> <div class="boton"> <a href="#" class="carrito">Agregar al carrito</a> </div> </div>';
+            listaProductos.innerHTML += '<div id = "producto" class="productos"> <img src="static/imagenes/'+ producto.foto + '" alt=""> <h3>' + producto.descripcion + '</h3> <div class="price">$' + producto.precio + '</div> <div class="boton"> <a href="#" class="carrito">Agregar al carrito</a> </div></div>';
            }
         })
         .catch(function (error) {
            // Código para manejar errores
            alert('Error al obtener los productos.');
        })
+
 
 </script>
 

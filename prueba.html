@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .image-container {
+      width:30%;
+      position: relative;
+      /*display: inline-block;*/
+    }
+
+    .offer-badge {
+      position: absolute;
+      bottom: 0px; /* Ajusta la posición vertical según sea necesario */
+      right: 10px; /* Ajusta la posición horizontal según sea necesario */
+      width: 60%; /* Ajusta el ancho del cartel de oferta según sea necesario */
+      z-index: 1; /* Ajusta el índice z para que el cartel esté sobre la imagen principal */
+    }
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+
+<div class="image-container">
+  <img src="static/imagenes/productos_1_1701200884.jpg" alt="Producto Principal">
+  <img class="offer-badge" src="static/imagenes/cartelOferta.png" alt="Oferta Especial">
+</div>
+<div class="image-container">
+  <img src="static/imagenes/productos_1_1701200884.jpg" alt="Producto Principal">
+  <img class="offer-badge" src="static/imagenes/cartelOferta.png" alt="Oferta Especial">
+</div>
+</body>
+</html>
