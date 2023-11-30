@@ -121,6 +121,13 @@ class Accesobase:
         self.limpia_base()
         return articulos
     # ----------------------------------------------------------------------------------------------------------
+    
+    # ELIMINAR PRODUCTO----------------------------------------------------------------------------------------------------------
+    def eliminar_articulos(self, id):
+        self.prepara_base()
+        self.cursor.execute(f"DELETE FROM articulos WHERE id = {id}")
+        self.conexion.commit()
+        return self.cursor.rowcount > 0
 
 #   Programa Principal------------------------------------------------------------------
 RUTA_DESTINO = './static/imagenes/'
@@ -208,7 +215,15 @@ def login():
 def listar_articulos_para_clientes():
     consulta_articulos = acceso_base.listar_articulos_para_clientes()
     return jsonify(consulta_articulos)
-        
+
+# DELETE eliminar producto -----------------------------------------------------------
+
+@app.route("/articulos/<int:id>", methods=["DELETE"])
+def eliminar_articulos(id):
+    if acceso_base.eliminar_articulos(id):
+        return jsonify({"mensaje": "Producto eliminado"}), 200
+    else:
+        return jsonify({"mensaje": "Producto no encontrado"}), 404
 
 if __name__ == "__main__":
     app.run(debug=True)

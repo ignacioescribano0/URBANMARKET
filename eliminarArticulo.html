@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado de Productos</title>
-    <link rel="stylesheet" href="estilos/estilosIntranet.css">>
+    <link rel="stylesheet" href="estilos/estilosIntranet.css">
     <script>
         var empleado = sessionStorage.getItem('empleado');
         var modoDebug = sessionStorage.getItem('modoDebug');
@@ -14,28 +14,29 @@
         if (!(modoDebug=="activado") && empleado == null ){window.location.href = "index.html";}
         
     </script>
+
 </head>
 
 <body>
-    <h1>INTRANET URBANMARKET</h1>
-    <h3>Eliminar Articulos</h3>
+    <h1 class="titulos_intranet">INTRANET URBANMARKET</h1>
+    <h3 class="titulos_intranet">Eliminar Articulos</h3>
     <table>
         <thead>
             <tr>
                 <th>Código</th>
                 <th>Descripción</th>
-                <th>Cantidad</th>
+                <th>Categoria1</th>
                 <th align="right">Precio</th>
                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
             <tr v-for="producto in productos">
-                <td>{{ producto.codigo }}</td>
+                <td>{{ producto.id }}</td>
                 <td>{{ producto.descripcion }}</td>
-                <td>{{ producto.cantidad }}</td>
+                <td>{{producto.ca1}}</td>
                 <td align="right">{{ producto.precio }}</td>
-                <td><button @click="eliminarProducto(producto.codigo)">Eliminar</button></td>
+                <td><button @click="eliminarProducto(producto.id)">Eliminar</button></td>
             </tr>
         </tbody>
     </table>
@@ -43,12 +44,14 @@
     <div class="contenedor-centrado">
         <a href="menuIntranet.html">Menu principal</a>
     </div>
-
+    <div class="contenedor_img">
+        <img class="imagen_intranet" src="logos/logo_menu_escritorio.png">
+    </div>
     <script src="https://unpkg.com/vue@next"></script>
     <script>
-        //const URL = "http://127.0.0.1:5000/"
+        const URL = "http://127.0.0.1:5000/"
         //const URL = "https://arielfsp.pythonanywhere.com/"
-        const URL = "https://prueba23513.pythonanywhere.com/"
+        //const URL = "https://prueba23513.pythonanywhere.com/"
 
         const app = Vue.createApp({
             data() {
@@ -59,7 +62,7 @@
             methods: {
                 obtenerProductos() {
                     // Obtenemos el contenido del inventario
-                    fetch(URL + 'productos')
+                    fetch(URL + '/articulos')
                         .then(response => {
                              // Parseamos la respuesta JSON 
                             if (response.ok) { return response.json();}
@@ -75,11 +78,10 @@
                 },
                 eliminarProducto(codigo) {
                     if (confirm('¿Estás seguro de que quieres eliminar este producto?')) {
-                        fetch(URL + `productos/${codigo}`, { method: 'DELETE' })
+                        fetch(URL + `articulos/${codigo}`, { method: 'DELETE' })
                             .then(response => {
                                 if (response.ok) {
-                                    this.productos = this.productos.filter(producto => producto.codigo !== codigo);
-                                    alert('Producto eliminado correctamente.');
+                                    this.productos = this.productos.filter(producto => producto.id !== codigo);
                                 }
                             })
                             .catch(error => {
