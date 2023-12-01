@@ -7,7 +7,7 @@
    
   function hacerTrabajo (){
         
-    fetch('otros/clientes.txt') // Archivo a leer
+    fetch('txt/clientes.txt') // Archivo a leer
             .then(response=>response.text())
             .then(TEXT=>parsea(TEXT))
         

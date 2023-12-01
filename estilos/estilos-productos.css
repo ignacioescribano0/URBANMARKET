@@ -1,8 +1,22 @@
+.contenedor_foto1 {
+   
+   position: relative;
+   display: inline-block;
+ }
 
+ .banner_oferta {
+   position: absolute;
+   bottom: 0px; /* Ajusta la posición vertical según sea necesario */
+   right:0; /* Ajusta la posición horizontal según sea necesario */
+   height:7vh;
+    /* Ajusta el ancho del cartel de oferta según sea necesario */
+   z-index: 1; /* Ajusta el índice z para que el cartel esté sobre la imagen principal */
+ }
 .contenedor_global {
     display: grid;
     grid-template: 1fr;
     grid-template-areas: "header" 
+                        "contenedor_categorias"
                             "contenedor_ofertas"
                          "contenedor_productos"
                          "footer";
@@ -12,12 +26,18 @@
 }
 
 .header    { grid-area: header;}
+.contenedorCategorias{grid-area: contenedor_categorias;}
 .contenedor_ofertas {grid-area: contenedor_ofertas;}
 .contenedor_productos    {grid-area: contenedor_productos;}
 .footer    { grid-area: footer;}
 
 
-
+.contenedorCategorias
+    {
+    display: inline-flex;
+    flex-direction:row; 
+    width :100%;
+    }
 
 
 /* OFERTAS */

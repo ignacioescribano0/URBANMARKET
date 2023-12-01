@@ -51,7 +51,11 @@
             </div>
         </div> 
     </header>
-
+    <div class="contenedor_ofertas">     
+        <h2> Ofertas destacadas </h2>
+        <div id="productosOferta" class="listas_productos">     
+        </div>
+    </div>
       <section class="contenedor_descuentos">    
        
     <div class="descuentos">
@@ -85,8 +89,7 @@
             </div>
         </div>
     </seccion>
-    
-  
+   
     <footer class="footer"> 
     <div class="contenedor_footer" >
         <div class="seccion_footer nosotros_footer"> 
@@ -145,6 +148,40 @@
     </footer>
 
 </main>
+
+<script>
+    var ubicacionFlask = localStorage.getItem('ubicacionFlask');
+        /*PRODUCTOS OFERTA*/
+        let listaProductosOferta = document.getElementById('productosOferta');
+        listaProductosOferta.innerHTML = '';
+                // Realizamos la solicitud GET al servidor para obtener todos los productos
+        fetch(ubicacionFlask + '/articulos/ofertas')
+        .then(function (response) {
+           if (response.ok) {return response.json(); }
+        })
+
+        .then(function (data) {
+           // Iteramos sobre los productos y agregamos filas a la tabla
+           for (let producto of data) {  
+            if (producto.enoferta ==1 ){         
+            listaProductosOferta.innerHTML += '<div id = "producto" class="productos"><div class="contenedor_foto1"> <img src="static/imagenes/'+ producto.foto + '" ><img class="banner_oferta" src="static/imagenes/cartelOferta.png"></div> <h3 style="height:10vh;">' + producto.descripcion + '</h3> <div class="price"><strong>$' + producto.precio + '</strong> </div>  <div class="boton"> <a href="#" class="carrito">Agregar al carrito</a> </div> </div>';
+            }
+            else
+            {         
+            listaProductosOferta.innerHTML += '<div id = "producto" class="productos"><div class="contenedor_foto1"> <img src="static/imagenes/'+ producto.foto + '" ></div> <h3 style="height:10vh;">' + producto.descripcion + '</h3> <div class="price"><strong>$' + producto.precio + '</strong> </div>  <div class="boton"> <a href="#" class="carrito">Agregar al carrito</a> </div> </div>';          
+            }
+           }
+        })
+           
+        .catch(function (error) {
+           // Código para manejar errores
+           alert('Error al obtener los productos.');
+       })
+
+
+
+   </script> 
+
 </body>   
 </html> 
 

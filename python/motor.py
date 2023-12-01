@@ -120,6 +120,14 @@ class Accesobase:
         articulos = self.cursor.fetchall() 
         self.limpia_base()
         return articulos
+    
+     # -------------------------------------------------------------------------------------------------
+    def listar_articulos_para_clientes_ofertas(self):
+        self.prepara_base()
+        self.cursor.execute("SELECT id,descripcion,precio,foto,enoferta FROM articulos where enoferta=1;")
+        articulos = self.cursor.fetchall() 
+        self.limpia_base()
+        return articulos
     # ----------------------------------------------------------------------------------------------------------
     
     # ELIMINAR PRODUCTO----------------------------------------------------------------------------------------------------------
@@ -210,11 +218,16 @@ def login():
         return jsonify({"mensaje": "login exitoso"}), 201
     else:
          return jsonify({"mensaje": "No se encontro la combinacion usuario/password"}), 201
-    
+#-------------------------------------------------------------------------------------------    
 @app.route("/articulos/clientes", methods=["GET"])
 def listar_articulos_para_clientes():
-    consulta_articulos = acceso_base.listar_articulos_para_clientes()
-    return jsonify(consulta_articulos)
+    consulta_articulosxcategoria = acceso_base.listar_articulos_para_clientes()
+    return jsonify(consulta_articulosxcategoria)
+#-------------------------------------------------------------------------------------------    
+@app.route("/articulos/ofertas", methods=["GET"])
+def listar_articulos_para_clientes_ofertas():
+    consulta_articulos_oferta = acceso_base.listar_articulos_para_clientes_ofertas()
+    return jsonify(consulta_articulos_oferta)
 
 # DELETE eliminar producto -----------------------------------------------------------
 
@@ -224,6 +237,8 @@ def eliminar_articulos(id):
         return jsonify({"mensaje": "Producto eliminado"}), 200
     else:
         return jsonify({"mensaje": "Producto no encontrado"}), 404
+
+#-----------------------------------------------------------------------------
 
 if __name__ == "__main__":
     app.run(debug=True)
