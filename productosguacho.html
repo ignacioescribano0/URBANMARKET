@@ -155,40 +155,56 @@
     </footer>
 
 </main>
-
-
-
-
 <script>    
-/********************************************************************************************
- * AREA DE VARIABLES
-********************************************************************************************/
-
 var ubicacionFlask          = localStorage.getItem('ubicacionFlask');
-var selectCat1              = document.getElementById('cat1');
+let selectCat1              = document.getElementById('cat1');
 var selectCat2              = document.getElementById('cat2');
 var selectCat3              = document.getElementById('cat3');
 var selectCat4              = document.getElementById('cat4');
 var botonConsulta           = document.getElementById('consulta')
 var seleccionConsultaxCat   = document.getElementById('chkCategoria'); 
-var seleccionConsultaTodos  = document.getElementById('chkTodos'); 
+var seleccionConsultaTodos = document.getElementById('chkTodos'); 
 var contenedorCategorias    = document.getElementById('contenedorCategorias'); 
 var listaProductos          = document.getElementById('productos');
 var labelCategorias         = document.getElementById("labelCategorias");
 listaProductos.innerHTML    = '';
 
-/*********************************************************************************************
- * AREA FUNCIONES
- *********************************************************************************************/
-function ConsultaxCategorias()
+    /*PRODUCTOS DEL CATALOGO*/
+// Realizamos la solicitud GET al servidor para obtener todos los productos
+var ubicacionFlask = localStorage.getItem('ubicacionFlask');
+        /*PRODUCTOS OFERTA*/
+        let listaProductosOferta = document.getElementById('productosOferta');
+        listaProductos.innerHTML = '';
+                // Realizamos la solicitud GET al servidor para obtener todos los productos
+        fetch(ubicacionFlask + '/articulos/clientes')
+        .then(function (response) {
+           if (response.ok) {return response.json(); }
+        })
+        .then(function (data) {
+           // Iteramos sobre los productos y agregamos filas a la tabla
+           for (let producto of data) {  
+            if (producto.enoferta ==1 ){         
+            listaProductos.innerHTML += '<div id = "producto" class="productos"><div class="contenedor_foto1"> <img src="static/imagenes/'+ producto.foto + '" ><img class="banner_oferta" src="static/imagenes/cartelOferta.png"></div> <h3 style="height:10vh;">' + producto.descripcion + '</h3> <div class="price"><strong>$' + producto.precio + '</strong> </div>  <div class="boton"> <a href="#" class="carrito">Agregar al carrito</a> </div> </div>';
+            }
+            else
+            {         
+            listaProductos.innerHTML += '<div id = "producto" class="productos"><div class="contenedor_foto1"> <img src="static/imagenes/'+ producto.foto + '" ></div> <h3 style="height:10vh;">' + producto.descripcion + '</h3> <div class="price"><strong>$' + producto.precio + '</strong> </div>  <div class="boton"> <a href="#" class="carrito">Agregar al carrito</a> </div> </div>';          
+            }
+           }
+        })
+           
+        .catch(function (error) {
+           // Código para manejar errores
+           alert('Error al obtener los productos.');
+       })
+
+
+
+seleccionConsultaxCat.addEventListener('change', function()
 {
+    console.log(seleccionConsultaxCat.checked);
     if (seleccionConsultaxCat.checked==true)
     {
-    selectCat1.innerHTML ="";
-    selectCat2.innerHTML ="";
-    selectCat3.innerHTML ="";
-    selectCat4.innerHTML ="";
-    listaProductos.innerHTML    = '';
     contenedorCategorias.hidden = false; 
     selectCat1.hidden           = false;
     selectCat2.hidden           = false;
@@ -196,14 +212,32 @@ function ConsultaxCategorias()
     selectCat4.hidden           = false;
     botonConsulta.hidden        = false;
     labelCategorias.hidden      = false;
-    obtieneCategoria1();
     }
-}
-function obtieneCategoria1() 
+    
+
+})
+
+seleccionConsultaTodos.addEventListener('change', function()
 {
+    console.log(seleccionConsultaTodos.checked);
+    if (seleccionConsultaTodos.checked==true)
+    {
+    contenedorCategorias.hidden = true; 
+    selectCat1.hidden           = true;
+    selectCat2.hidden           = true;
+    selectCat3.hidden           = true;
+    selectCat4.hidden           = true;
+    botonConsulta.hidden        = true;
+    labelCategorias.hidden      = true;
+    }
+
+})
+
+
 ////////////////////////////////////////////////////////////////
 // Armo browse 1
-//////////////////////////////////////////////////////////////// 
+////////////////////////////////////////////////////////////////
+
 fetch(ubicacionFlask + '/categorias/cat1')
 .then(function (response){if (response.ok) {return response.json(); } })
 .then(function (data)
@@ -216,12 +250,11 @@ fetch(ubicacionFlask + '/categorias/cat1')
     selectCat1.innerHTML +='</select>';
 })
 
-}
-function seleccionCategoria1()
-{
-    ////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
 // Seleccion Categoria 1. Armo browse categoria 2
 ////////////////////////////////////////////////////////////////
+document.getElementById('cat1').addEventListener('change', function()
+{
     var eleccionCat1 = selectCat1.value;          
     // Realizamos la solicitud GET al servidor
     fetch(ubicacionFlask + '/categorias/cat2/'+ eleccionCat1)
@@ -237,12 +270,13 @@ function seleccionCategoria1()
         selectCat2.innerHTML +='</select>';
 
     })
-}
-function seleccionCategoria2()
-{
-    ////////////////////////////////////////////////////////////////
+})
+
+////////////////////////////////////////////////////////////////
 // Seleccion Categoria 2 Armo browse categoria 3
 ////////////////////////////////////////////////////////////////
+document.getElementById('cat2').addEventListener('change', function()
+{
     // Realizamos la solicitud GET al servidor
     fetch(ubicacionFlask + '/categorias/cat3/'+ selectCat2.value)
     .then(function (response) {if (response.ok) {return response.json(); }})
@@ -255,12 +289,12 @@ function seleccionCategoria2()
         }
         selectCat3.innerHTML +='</select>';
     })      
-}
-function seleccionCategoria3()
-{
-    ////////////////////////////////////////////////////////////////
+});
+////////////////////////////////////////////////////////////////
 // Seleccion Categoria 3 Armo browse categoria 4
 ////////////////////////////////////////////////////////////////
+document.getElementById('cat3').addEventListener('change', function() 
+{
     // Realizamos la solicitud GET al servidor
     fetch(ubicacionFlask + '/categorias/cat4/'+ selectCat3.value)
     .then(function (response) {if (response.ok) {return response.json(); }})
@@ -274,12 +308,12 @@ function seleccionCategoria3()
             }
         selectCat4.innerHTML +='</select>';
     })      
-};
-function presionaBotonConsulta()
-{   
-    //////////////////////////////////////////////////
+});
+//////////////////////////////////////////////////
 // consulto la base con la seleccion de categorias
 //////////////////////////////////////////////////
+document.getElementById('consulta').addEventListener('click', function() 
+{
     listaProductos.innerHTML = '';
     var formData = new FormData();
     formData.append('cat1', selectCat1.value);
@@ -307,64 +341,7 @@ function presionaBotonConsulta()
         // Código para manejar errores
         alert('Error al obtener los productos.');
     })
-};
-function consultaTodoElPadron()
-{
-    if (seleccionConsultaTodos.checked==true)
-    {
-    contenedorCategorias.hidden = true; 
-    selectCat1.hidden           = true;
-    selectCat2.hidden           = true;
-    selectCat3.hidden           = true;
-    selectCat4.hidden           = true;
-    botonConsulta.hidden        = true;
-    labelCategorias.hidden      = true;
-    }    
-    /*PRODUCTOS DEL CATALOGO*/
-        // Realizamos la solicitud GET al servidor para obtener todos los productos
-        /*PRODUCTOS */
-        
-        listaProductos.innerHTML = '';
-                // Realizamos la solicitud GET al servidor para obtener todos los productos
-        fetch(ubicacionFlask + '/articulos/clientes')
-        .then(function (response) {
-           if (response.ok) {return response.json(); }
-        })
-        .then(function (data) {
-           // Iteramos sobre los productos y agregamos filas a la tabla
-           for (let producto of data) {  
-            if (producto.enoferta ==1 ){         
-            listaProductos.innerHTML += '<div id = "producto" class="productos"><div class="contenedor_foto1"> <img src="static/imagenes/'+ producto.foto + '" ><img class="banner_oferta" src="static/imagenes/cartelOferta.png"></div> <h3 style="height:10vh;">' + producto.descripcion + '</h3> <div class="price"><strong>$' + producto.precio + '</strong> </div>  <div class="boton"> <a href="#" class="carrito">Agregar al carrito</a> </div> </div>';
-            }
-            else
-            {         
-            listaProductos.innerHTML += '<div id = "producto" class="productos"><div class="contenedor_foto1"> <img src="static/imagenes/'+ producto.foto + '" ></div> <h3 style="height:10vh;">' + producto.descripcion + '</h3> <div class="price"><strong>$' + producto.precio + '</strong> </div>  <div class="boton"> <a href="#" class="carrito">Agregar al carrito</a> </div> </div>';          
-            }
-           }
-        })
-           
-        .catch(function (error) {
-           // Código para manejar errores
-           alert('Error al obtener los productos.');
-       })
-}
-
-
-/*********************************************************************************************
- * AREA ESCUCHADORES
- *********************************************************************************************/
-seleccionConsultaxCat.addEventListener('change',function(){ ConsultaxCategorias()});
-selectCat1.addEventListener('change', function(){ seleccionCategoria1()});
-selectCat2.addEventListener('change', function(){ seleccionCategoria2()});
-selectCat3.addEventListener('change', function(){ seleccionCategoria3()});
-botonConsulta.addEventListener('click', function(){presionaBotonConsulta()}); 
-seleccionConsultaTodos.addEventListener('change', function(){consultaTodoElPadron()});
-
-///////////////////////////////////////////////////////////////////////////////
-///  AREA EJECUCION
-//////////////////////////////////////////////////////////////////////////////
-
-consultaTodoElPadron()
+})
 
 </script>
 

@@ -194,10 +194,7 @@
             formData.append('cat4', document.getElementById('cat4').value);
             formData.append('precio', document.getElementById('precio').value);
             formData.append('oferta', document.getElementById('chkSi').checked); 
-            formData.append('imagen', document.getElementById('imagenProducto').files[0]);
-            
-            //formData.append('imagen', document.getElementById('imagenProducto').files[0]);
-            
+            formData.append('imagen', document.getElementById('imagenProducto').files[0]);    
             fetch(ubicacionFlask + '/articulos', {
                 method: 'POST',
                 body: formData // Aquí enviamos formData en lugar de JSON

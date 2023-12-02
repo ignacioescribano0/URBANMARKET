@@ -114,7 +114,7 @@ class Accesobase:
         return empleados
     
     # ----------------------------------------------------------------------------------------------------------
-    def listar_articulos_para_clientes(self):
+    def listar_articulos_todos(self):
         self.prepara_base()
         self.cursor.execute("SELECT id,descripcion,precio,foto,enoferta FROM articulos")
         articulos = self.cursor.fetchall() 
@@ -129,7 +129,14 @@ class Accesobase:
         self.limpia_base()
         return articulos
     # ----------------------------------------------------------------------------------------------------------
-    
+    def listar_articulos_x_categoria(self,cat1,cat2,cat3,cat4):
+        self.prepara_base()     
+        self.cursor.execute(f"SELECT id,descripcion,precio,foto,enoferta FROM articulos where cat1='{cat1}' and cat2='{cat2}' and cat3='{cat3}' and cat4='{cat4}'")
+                          
+        articulos = self.cursor.fetchall() 
+        self.limpia_base()
+        return articulos
+    #--------------------------------------------------------------------------------------------------------
     # ELIMINAR PRODUCTO----------------------------------------------------------------------------------------------------------
     def eliminar_articulos(self, id):
         self.prepara_base()
@@ -220,15 +227,25 @@ def login():
          return jsonify({"mensaje": "No se encontro la combinacion usuario/password"}), 201
 #-------------------------------------------------------------------------------------------    
 @app.route("/articulos/clientes", methods=["GET"])
-def listar_articulos_para_clientes():
-    consulta_articulosxcategoria = acceso_base.listar_articulos_para_clientes()
-    return jsonify(consulta_articulosxcategoria)
+def listar_articulos_todos():
+    consulta_articulos = acceso_base.listar_articulos_todos()
+    return jsonify(consulta_articulos)
 #-------------------------------------------------------------------------------------------    
 @app.route("/articulos/ofertas", methods=["GET"])
 def listar_articulos_para_clientes_ofertas():
     consulta_articulos_oferta = acceso_base.listar_articulos_para_clientes_ofertas()
     return jsonify(consulta_articulos_oferta)
 
+#--------------------------------------------------------------------------------------------
+@app.route("/articulos/categorias", methods=["POST"])
+def listar_articulos_x_categoria():
+    cat1 = request.form['cat1']
+    cat2 = request.form['cat2']
+    cat3 = request.form['cat3']
+    cat4 = request.form['cat4']
+    print(f"categoria 1:{cat1} categoria2:{cat2} categoria3:{cat3} categoria4:{cat4}")
+    consulta_articulos_categoria = acceso_base.listar_articulos_x_categoria(cat1,cat2,cat3,cat4)
+    return jsonify(consulta_articulos_categoria)
 # DELETE eliminar producto -----------------------------------------------------------
 
 @app.route("/articulos/<int:id>", methods=["DELETE"])

@@ -18,9 +18,16 @@ h2 {
   color: #304E9D;
   font-size: 2em;
 }
-
+.centro{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
 
 h3 {
+  display:flex;
+  justify-content: center;
+  align-items: center;
   color: #DE7D39;
 }
 
