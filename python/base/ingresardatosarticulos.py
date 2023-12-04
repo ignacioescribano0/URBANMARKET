@@ -52,8 +52,8 @@ class Importador:
     '''
 # Programa principal----------------------------------------------------------------------------------------------
 
-o_importador = Importador(host='localhost', user='root', password='', database='urbanmarket1')
-#o_importador = Importador(host='urbanmarket.mysql.pythonanywhere-services.com', user='urbanmarket', password='codoacodo1', database='base')
+#o_importador = Importador(host='localhost', user='root', password='', database='urbanmarket1')
+o_importador = Importador(host='urbanmarket.mysql.pythonanywhere-services.com', user='urbanmarket', password='codoacodo1', database='urbanmarket$base')
 
 #o_importador.agregar_articulo( "HARINA ESPECIAL MARUCA","HARINA MARUCA",45,5,5,5,5,True,"foto1.jg")
 #o_importador.agregar_articulo(11, "HARINA ESPECIAL MARUCA","HARINA MARUCA",45.23)

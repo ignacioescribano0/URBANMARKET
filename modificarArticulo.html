@@ -5,141 +5,423 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modificar Producto</title>
-    <link rel="stylesheet" href="estilos/estilosIntranet.css">>
+    <title>Listado de Productos</title>
+    <link rel="stylesheet" href="estilos/estilosIntranet.css">
     <script>
         var empleado = sessionStorage.getItem('empleado');
         var modoDebug = sessionStorage.getItem('modoDebug');
 
-        if (!(modoDebug=="activado") && empleado == null ){window.location.href = "index.html";}
+        //if (!(modoDebug=="activado") && empleado == null ){window.location.href = "index.html";}
         
     </script>
+
 </head>
 
 <body>
-    <h1>INTRANET URBANMARKET</h1>
-    <h3>Modificar Articulos</h3>
-    
-    <div id="app">
-        <form @submit.prevent="obtenerProducto">
-            <label for="codigo">Código:</label>
-            <input type="text" v-model="codigo" required><br>
-            <button type="submit">Modificar Producto</button> <a href="menuIntranet.html">Menu principal</a>
-        </form>
+    <h1 class="titulos_intranet">INTRANET URBANMARKET</h1>
+    <h3 class="titulos_intranet">Modificar Articulos</h3>
+    <table id="tabla" >
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Descripción</th>
+                <th>Categoria1</th>
+                <th align="right">Precio</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+            <tbody id="tablaProductos"> </tbody>
+    </table>
 
-        <div v-if="mostrarDatosProducto">
-            <h2>Datos del Producto</h2>
-            <form @submit.prevent="guardarCambios">
-                <label for="descripcionModificar">Descripción:</label>
-                <input type="text" id="descripcionModificar" v-model="descripcion" required><br>
 
-                <label for="cantidadModificar">Cantidad:</label>
-                <input type="number" id="cantidadModificar" v-model="cantidad" required><br>
+    <form id="formulario" hidden enctype="multipart/form-data">
+        <label for="descripcion">Descripción:</label>
+        <input type="text" id="descripcion" name="codigo" style="width:35vh;" required><br>
 
-                <label for="precioModificar">Precio:</label>
-                <input type="number" step="0.01" id="precioModificar" v-model="precio" required><br>
+        <label for="descripcion">Descripción Reducida:</label>
+        <input type="text" id="descripcion_red" name="descripcion"style="width:30vh;" required><br>
 
-                <!-- Imagen actual del producto
-                <img v-if="imagen_url && !imagenSeleccionada" :src="'./static/imagenes/' + imagen_url"
-                    alt="Imagen del producto" style="max-width: 200px;"> -->
-
-                <!-- Vista previa de la nueva imagen seleccionada -->
-                <!-- <img v-if="imagenSeleccionada" :src="imagenUrlTemp" alt="Vista previa de la nueva imagen"
-                    style="max-width: 200px;"> -->
-
-                <!-- Input para nueva imagen -->
-                <!-- <label for="nuevaImagen">Nueva Imagen:</label>
-                <input type="file" id="nuevaImagen" @change="seleccionarImagen"><br> -->
-
-                <label for="proveModificar">proveedor:</label>
-                <input type="number" id="proveModificar" v-model="proveedor" required><br>
-
-                <button type="submit">Guardar Cambios</button>
-                <a href="modificaciones.html">Cancelar</a>
-            </form>
+        <div class="container">
+            <div class="container1" >
+                <label for="cat1">Categoria 1:</label>
+                <select title="hola" id="cat1" class="selecto" name="categoria1" size="7"></select>
+            </div>
+            <br>
+            <div class="container1">
+                <label for="cat2">Categoria 2:</label>
+                <select title="hola1" id="cat2" class="selecto" name="categoria2" size="7"></select>
+            </div>
+            <br>
+            <div class="container1">
+                <label for="cat3">Categoria 3:</label>
+                <select title="hola" id="cat3" class="selecto" name="categoria3" size="7"></select>
+            </div>
+            <br>
+            <div class="container1">
+                <label for="cat4">Categoria 4:</label>
+                <select title="hola" id="cat4" class="selecto" name="categoria4" size="7"></select>
+            </div>    
         </div>
+
+        <label for="precio">Precio:</label>
+        <input type="number" step="0.01" id="precio" name="precio" required><br>
+
+        <label ></label>  Producto de oferta? </label>
+        <input  type="radio" name="opcionOferta" id="chkSi">Si
+                
+        <input  type="radio" name="opcionOferta"  id="chkNo">No
+                
+        <br>
+        <br>
+        
+        <label for="imagenProducto">Imagen del producto:</label>
+        <input type="file" id="imagenProducto" name="imagen" hidden> 
+        <br>
+        <img id="selectedImage" hidden  alt="" style="max-width: 100%; max-height: 200px;" >
+        <br>
+        <br>
+        <button type="submit">Modificar Producto</button>
+    </form>
+
+
+
+    <div class="contenedor-centrado">
+        <a href="menuIntranet.html">Menu principal</a>
     </div>
-
-    <script src="https://unpkg.com/vue@next"></script>
+    <div class="contenedor_img">
+        <img class="imagen_intranet" src="logos/logo_menu_escritorio.png">
+    </div>
+    
     <script>
-        //const URL = "http://127.0.0.1:5000/"
-        //const URL = "https://arielfsp.pythonanywhere.com/"
-        const URL = "https://prueba23513.pythonanywhere.com/"
+    var ubicacionFlask = localStorage.getItem('ubicacionFlask');
+    
+    var reader = new FileReader();
+    var tabla              = document.getElementById('tabla');
+    var codigo       = document.getElementById('codigo');
+    var descripcion     = document.getElementById('descripcion');
+    var precio          = document.getElementById('precio');
+    var descripcionRed  = document.getElementById('descripcion_red');
+    var precio          = document.getElementById('precio');
+    var ofertaSi        = document.getElementById('chkSi');
+    var ofertaNo        = document.getElementById('chkNo');
+    var selectedImage = document.getElementById('selectedImage');
+    var fileInput = document.getElementById('imagenProducto');
+    var selectCat1 = document.getElementById('cat1');
+    var selectCat2 = document.getElementById('cat2');
+    var selectCat3 = document.getElementById('cat3');
+    var selectCat4 = document.getElementById('cat4');
+    var eleccionCat1=0; eleccionCat2 =0; eleccionCat3=0; eleccionCat4=0;
+    var id="";
 
-        const app = Vue.createApp({
-            data() {
-                return {
-                    codigo: '',
-                    descripcion: '',
-                    cantidad: '',
-                    precio: '',
-                    proveedor: '',
-                    imagen_url: '',
-                    imagenUrlTemp: null,
-                    mostrarDatosProducto: false,
-                };
-            },
-            methods: {
-                obtenerProducto() {
-                    console.log(URL + 'productos/' + this.codigo)
-                    fetch(URL + 'productos/' + this.codigo)
-                        .then(response => response.json())
-                        .then(data => {
-                            this.descripcion = data.descripcion;
-                            this.cantidad = data.cantidad;
-                            this.precio = data.precio;
-                            this.proveedor = data.proveedor;
-                            this.imagen_url =  "" //data.imagen_url;
-                            this.mostrarDatosProducto = true;
-                        })
-                        .catch(error => console.error('Error:', error));
-                },
-                seleccionarImagen(event) {
-                    //const file = event.target.files[0];
-                    //this.imagenSeleccionada = file;
-                    //this.imagenUrlTemp = URL.createObjectURL(file); // Crea una URL temporal para la vista previa
-                },
-                guardarCambios() {
-                    const formData = new FormData();
-                    formData.append('codigo', this.codigo);
-                    formData.append('descripcion', this.descripcion);
-                    formData.append('cantidad', this.cantidad);
-                    formData.append('proveedor', this.proveedor);
-                    formData.append('precio', this.precio);
 
-                    //if (this.imagenSeleccionada) {
-                    //    formData.append('imagen', this.imagenSeleccionada, this.imagenSeleccionada.name);
-                    //}
 
-                    fetch(URL + 'productos/' + this.codigo, {
-                        method: 'PUT',
-                        body: formData,
-                    })
-                        .then(response => response.json())
-                        .then(data => {
-                            alert('Producto actualizado correctamente');
-                            this.limpiarFormulario();
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                            alert('Error al actualizar el producto');
-                        });
-                },
-                limpiarFormulario() {
-                    this.codigo = '';
-                    this.descripcion = '';
-                    this.cantidad = '';
-                    this.precio = '';
-                    this.imagen_url = '';
-                    this.imagenSeleccionada = null;
-                    this.imagenUrlTemp = null;
-                    this.mostrarDatosProducto = false;
-                }
+
+    function handleFile() 
+        {
+            // Your script to be executed when a file is selected
+            if (fileInput.files.length > 0)
+            {
+                var fileName = fileInput.files[0].name;
+                //alert('Selected File: ' + fileName);       
             }
-        });
+        
+            reader.onload = function (e)
+            {
+                // Set the data URL as the source of the image element
+                selectedImage.src = e.target.result;
+                selectedImage.hidden = false;
+            }
+            reader.readAsDataURL(fileInput.files[0]);
+        
+        }
 
-        app.mount('#app');
+
+async function modificarProducto(codigo)
+{
+    try{
+    tabla.hidden= true;
+    formulario.hidden=false; 
+    const response = await fetch(ubicacionFlask + '/articulo/' + codigo + "", { method: 'GET' })
+    if (response.ok)
+    {
+        const data = await response.json();                
+        for (let producto of data) 
+        {
+            id =codigo;
+            
+            descripcion.value    =  producto.descripcion;
+            descripcionRed.value =  producto.descripcion_red; 
+            precio.value         =  producto.precio;
+            if (producto.enoferta ==1){ofertaSi.checked= true;}
+            else { ofertaNo.checked=true;}
+            selectedImage.src = 'static/imagenes/'+ producto.foto;
+            //fileInput.files[0] = 'static/imagenes/'+ producto.foto;
+            selectedImage.hidden = false;
+            eleccionCat1 =producto.cat1 ;
+            eleccionCat2 =producto.cat2 ;
+            eleccionCat3 =producto.cat3 ;
+            eleccionCat4 =producto.cat4 ;
+        }
+    }  
+    else
+    {
+        console.error('Error en la respuesta del servidor:', response.statusText);
+    }
+    }catch(error)
+    {                        // Código para manejar errores
+        alert('Error al obtener los productos.');
+    }
+
+    // Armo browse 1
+    try
+    {
+        const response = await fetch(ubicacionFlask + '/categorias/cat1')
+        if (response.ok)
+        {
+            const data = await response.json();
+            
+            for (let categoria of data)
+            {
+                selectCat1.innerHTML = selectCat1.innerHTML + '<option value="' + categoria.id + '">'+ categoria.descripcion + '</option>';             
+            }
+                selectCat1.innerHTML +='</select>';  
+                selectCat1.value = eleccionCat1;
+        }
+        else
+        {
+            console.error('Error en la respuesta del servidor:', response.statusText);
+        }
+    }
+    catch(error)
+    {                        // Código para manejar errores
+        alert('Error al obtener los productos1.');
+    }
+     //ARMO BROWSE CATEGORIA 2
+    try
+    {         
+       // Realizamos la solicitud GET al servidor
+        const response = await fetch(ubicacionFlask  + '/categorias/cat2/'+ eleccionCat1)
+        if (response.ok)
+        {
+            const data = await response.json();    
+            selectCat2.innerHTML = ""
+            for (let categoria of data) 
+            {
+                selectCat2.innerHTML = selectCat2.innerHTML + '<option value="' + categoria.id + '">'+ categoria.descripcion + '</option>'; 
+            }
+            selectCat2.innerHTML +='</select>';
+            selectCat2.value = eleccionCat2;
+        }
+        else
+        {
+            console.error('Error en la respuesta del servidor:', response.statusText);
+        }
+    }
+    catch(error)
+    {                        // Código para manejar errores
+        alert('Error al obtener los productos.');
+    }
+     //ARMO BROWSE CATEGORIA 3
+
+    try
+    { 
+        const response = await fetch(ubicacionFlask + '/categorias/cat3/'+ eleccionCat2)
+        if (response.ok)
+        {
+            const data = await response.json(); 
+            selectCat3.innerHTML = ""
+            for (let categoria of data) 
+                {
+                    selectCat3.innerHTML = selectCat3.innerHTML + '<option value="' + categoria.id + '">'+ categoria.descripcion + '</option>';                    
+                }
+            selectCat3.innerHTML +='</select>';
+            selectCat3.value = eleccionCat3;
+        }  
+        else
+        {
+            console.error('Error en la respuesta del servidor:', response.statusText);
+        }
+    }
+    catch(error)
+    {                        // Código para manejar errores
+        alert('Error al obtener los productos.');
+    }
+    ///////////////////////////////////////////////////////////////////////
+    // ARMO BROWSE 4
+    ///////////////////////////////////////////////////////////////////////
+    try
+    { 
+        const response = await fetch(ubicacionFlask + '/categorias/cat4/'+ eleccionCat3)
+        if (response.ok)
+        {
+            const data = await response.json();
+            selectCat4.innerHTML = ""
+            for (let categoria of data)
+            {
+                selectCat4.innerHTML = selectCat4.innerHTML + '<option value="' + categoria.id + '">'+ categoria.descripcion + '</option>';                   
+            }
+            selectCat4.innerHTML +='</select>';
+            selectCat4.value = eleccionCat4;
+        }      
+        else
+        {
+            console.error('Error en la respuesta del servidor:', response.statusText);
+        }
+    }
+    catch(error)
+    {                        // Código para manejar errores
+        alert('Error al obtener los productos.');
+    }
+
+
+
+}
+
+
+        // Capturamos el evento de envío del formulario
+document.getElementById('formulario').addEventListener('submit', function (event)
+        {
+            event.preventDefault(); // Evitamos que se envie el form 
+
+            var formData = new FormData();
+            
+            formData.append('codigo', id);//document.getElementById('codigo').value);
+            formData.append('descripcion', document.getElementById('descripcion').value);
+            formData.append('descripcion_red', document.getElementById('descripcion_red').value);
+            formData.append('cat1', document.getElementById('cat1').value);
+            formData.append('cat2', document.getElementById('cat2').value);
+            formData.append('cat3', document.getElementById('cat3').value);
+            formData.append('cat4', document.getElementById('cat4').value);
+            formData.append('precio', document.getElementById('precio').value);
+            formData.append('oferta', document.getElementById('chkSi').checked); 
+            formData.append('imagen', document.getElementById('imagenProducto').files[0]);    
+            fetch(ubicacionFlask + '/update', {
+                method: 'PUT',
+                body: formData // Aquí enviamos formData en lugar de JSON
+            })
+            .then(function (response) {
+                if (response.ok) { return response.json(); }
+            })
+            .then(function (data) {
+                alert('Producto modificado correctamente.');
+                // Limpiar el formulario para el proximo producto
+                document.getElementById('descripcion').value = "";
+                document.getElementById('descripcion_red').value = "";
+                document.getElementById('cat1').value = "";
+                document.getElementById('cat2').value = "";
+                document.getElementById('cat3').value = "";
+                document.getElementById('cat4').value = "";
+                document.getElementById('imagenProducto').value = "";
+                document.getElementById('precio').value = "";
+                document.getElementById('cat2').innerHTML ="";
+                document.getElementById('cat3').innerHTML ="";
+                document.getElementById('cat4').innerHTML ="";
+                document.getElementById('chkNo').checked =true; 
+                document.getElementById('selectedImage').src ="";
+                document.getElementById('selectedImage').hidden =true;           
+            })
+            .catch(function (error) {
+                // Mostramos el error, y no limpiamos el form.
+                alert('Error al agregar el producto.');
+            });
+            
+        }) 
+//////////////////SECCION ESCUCHADORES
+fileInput.addEventListener('change', handleFile);
+
+selectCat1.addEventListener('change', function() 
+    {
+        var eleccionCat1 = document.getElementById('cat1').value;      
+       // Realizamos la solicitud GET al servidor
+        fetch(ubicacionFlask  + '/categorias/cat2/'+ eleccionCat1)
+        .then(function (response) 
+        {
+            if (response.ok) {return response.json(); }
+        })
+        .then(function (data) 
+        {
+            let selectCat2 = document.getElementById('cat2');
+            selectCat2.innerHTML = ""
+            for (let categoria of data) {
+                selectCat2.innerHTML = selectCat2.innerHTML + '<option value="' + categoria.id + '">'+ categoria.descripcion + '</option>'; 
+            }
+            selectCat2.innerHTML +='</select>';
+            selectCat3.innerHTML ="";
+            selectCat4.innerHTML ="";
+        })       
+    });
+
+selectCat2.addEventListener('change', function() {
+        var eleccionCat2 = document.getElementById('cat2').value;
+       //document.getElementById('catSelect').textContent = eleccionCat2;
+       // Realizamos la solicitud GET al servidor
+       fetch(ubicacionFlask + '/categorias/cat3/'+ eleccionCat2)
+       .then(function (response) {
+               if (response.ok) {return response.json(); }
+           })
+       .then(function (data) {
+               let selectCat3 = document.getElementById('cat3');
+               selectCat3.innerHTML = ""
+               for (let categoria of data) {
+                   selectCat3.innerHTML = selectCat3.innerHTML + '<option value="' + categoria.id + '">'+ categoria.descripcion + '</option>';                    
+               }
+               selectCat3.innerHTML +='</select>';
+               selectCat4.innerHTML ="";
+       })      
+   });
+
+// Seleccion Categoria 3. Armo browse categoria 4
+selectCat3.addEventListener('change', function() {
+       var eleccionCat3 = document.getElementById('cat3').value;
+       //document.getElementById('catSelect').textContent = eleccionCat2;
+       // Realizamos la solicitud GET al servidor
+       fetch(ubicacionFlask + '/categorias/cat4/'+ eleccionCat3)
+       .then(function (response) {
+               if (response.ok) {return response.json(); }
+           })
+       .then(function (data) {
+               let selectCat4 = document.getElementById('cat4');
+               selectCat4.innerHTML = ""
+               for (let categoria of data) {
+                   selectCat4.innerHTML = selectCat4.innerHTML + '<option value="' + categoria.id + '">'+ categoria.descripcion + '</option>';                   
+               }
+               selectCat4.innerHTML +='</select>';
+       })      
+   });
+
+
+//////////////////SECCION EJECUCION
+// Realizamos la solicitud GET al servidor para obtener todos los productos
+    fetch(ubicacionFlask + '/articulos')
+    .then(function (response)
+    {if (response.ok) {return response.json(); }})
+    .then(function (data) {
+        let tablaProductos = document.getElementById('tablaProductos');
+
+        // Iteramos sobre los productos y agregamos filas a la tabla
+        for (let producto of data) {
+            let fila = document.createElement('tr');
+            fila.innerHTML = '<td>' + producto.id + '</td>' +
+                '<td>' + producto.descripcion + '</td>' +
+                '<td align="right">' + producto.precio + '</td>' +
+                '<td>' + producto.ca1 + '</td>' +
+                '<td align="right">' + producto.precio + '</td>' +
+                '<td><button onclick="modificarProducto(' + producto.id + ')">Modificar</button></td>'
+                // Mostrar miniatura de la imagen
+                //'<td><img src=./static/imagenes/' + producto.imagen_url +' alt="Imagen del producto" style="width: 100px;"></td>' +
+                //'<td align="right">' + producto.proveedor + '</td>';
+            tablaProductos.appendChild(fila);
+        }
+    })
+    .catch(function (error) {
+        // Código para manejar errores
+        alert('Error al obtener los productos.');
+    });
+
+
+
+     
+
     </script>
-
 </body>
 </html>

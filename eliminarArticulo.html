@@ -49,10 +49,9 @@
     </div>
     <script src="https://unpkg.com/vue@next"></script>
     <script>
-        const URL = "http://127.0.0.1:5000/"
-        //const URL = "https://arielfsp.pythonanywhere.com/"
-        //const URL = "https://prueba23513.pythonanywhere.com/"
-
+        var ubicacionFlask = localStorage.getItem('ubicacionFlask');
+        
+      
         const app = Vue.createApp({
             data() {
                 return {
@@ -62,7 +61,7 @@
             methods: {
                 obtenerProductos() {
                     // Obtenemos el contenido del inventario
-                    fetch(URL + '/articulos')
+                    fetch(ubicacionFlask + '/articulos')
                         .then(response => {
                              // Parseamos la respuesta JSON 
                             if (response.ok) { return response.json();}
@@ -78,7 +77,7 @@
                 },
                 eliminarProducto(codigo) {
                     if (confirm('¿Estás seguro de que quieres eliminar este producto?')) {
-                        fetch(URL + `articulos/${codigo}`, { method: 'DELETE' })
+                        fetch(ubicacionFlask + `/articulos/${codigo}`, { method: 'DELETE' })
                             .then(response => {
                                 if (response.ok) {
                                     this.productos = this.productos.filter(producto => producto.id !== codigo);

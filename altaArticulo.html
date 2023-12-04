@@ -21,7 +21,7 @@
     <h3>Agregar articulos</h3>
 
     <!--enctype="multipart/form-data es necesario para enviar archivos al back.-->
-    <form id="formulario" enctype="multipart/form-data>
+    <form id="formulario" enctype="multipart/form-data">
         <label for="descripcion">Descripción:</label>
         <input type="text" id="descripcion" name="codigo" required><br>
 
@@ -89,7 +89,7 @@
             if (fileInput.files.length > 0)
             {
                 var fileName = fileInput.files[0].name;
-                //alert('Selected File: ' + fileName);       
+               // alert('Selected File: ' + fileName);       
             }
         
             reader.onload = function (e)

@@ -132,7 +132,6 @@ class Accesobase:
     def listar_articulos_x_categoria(self,cat1,cat2,cat3,cat4):
         self.prepara_base()     
         self.cursor.execute(f"SELECT id,descripcion,precio,foto,enoferta FROM articulos where cat1='{cat1}' and cat2='{cat2}' and cat3='{cat3}' and cat4='{cat4}'")
-                          
         articulos = self.cursor.fetchall() 
         self.limpia_base()
         return articulos
@@ -142,7 +141,29 @@ class Accesobase:
         self.prepara_base()
         self.cursor.execute(f"DELETE FROM articulos WHERE id = {id}")
         self.conexion.commit()
-        return self.cursor.rowcount > 0
+        retorno = (self.cursor.rowcount > 0)
+        return retorno
+    #----------------------------------------------------------------------------------------------------
+    def obtener_articulo(self,codigo):
+        self.prepara_base()
+        self.cursor.execute(f"SELECT  id,descripcion,descripcion_red,cat1,cat2,cat3,cat4,precio,foto,enoferta FROM articulos WHERE id = {codigo}")
+        articulo = self.cursor.fetchall()
+        self.limpia_base()
+        return articulo
+    #----------------------------------------------------------------
+    
+    def modificar_producto(self,id, descripcion,descripcion_red, precio, cat1,cat2,cat3,cat4,oferta,foto):
+        self.prepara_base()
+       
+        sql = "UPDATE articulos SET descripcion = %s, descripcion_red = %s, precio = %s, cat1= %s,cat2= %s,cat3= %s,cat4= %s,enoferta= %s WHERE id = %s"
+        valores = (descripcion, descripcion_red, precio, cat1,cat2,cat3,cat4,oferta,id)
+        self.cursor.execute(sql, valores)
+        self.conexion.commit()
+        retorno =self.cursor.rowcount > 0
+        self.limpia_base()
+        return retorno
+    
+
 
 #   Programa Principal------------------------------------------------------------------
 RUTA_DESTINO = './static/imagenes/'
@@ -256,6 +277,51 @@ def eliminar_articulos(id):
         return jsonify({"mensaje": "Producto no encontrado"}), 404
 
 #-----------------------------------------------------------------------------
+@app.route("/articulo/<int:codigo>", methods=["GET"])
+def obtener_articulo(codigo):
+    articulo = acceso_base.obtener_articulo(codigo)
+    return jsonify(articulo)
+#------------------------------------------------------------------------
+@app.route("/update", methods=["PUT"])
+def modificar_producto():
+    #Recojo los datos del form
+    codigo          = request.form.get("codigo")
+    descripcion     = request.form.get("descripcion")
+    descripcion_red = request.form.get("descripcion_red")
+    cat1            = request.form.get("cat1")
+    cat2            = request.form.get("cat2")
+    cat3            = request.form.get("cat3")
+    cat4            = request.form.get("cat4")
+    precio          = request.form.get("precio")
+    oferta          = request.form.get("oferta")
+    #imagen = request.files['imagen']
+    foto = ""
+   
+    # Procesamiento de la imagen
+    # nombre_imagen = secure_filename(imagen.filename)
+    # nombre_base, extension = os.path.splitext(nombre_imagen)
+    # nombre_imagen = f"{nombre_base}_{int(time.time())}{extension}"
+    # imagen.save(os.path.join(RUTA_DESTINO, nombre_imagen))
+
+    # Busco el producto guardado
+    #producto = producto = catalogo.consultar_producto(codigo)
+    # if producto: # Si existe el producto...
+    #     imagen_vieja = producto["imagen_url"]
+    #     # Armo la ruta a la imagen
+    #     ruta_imagen = os.path.join(RUTA_DESTINO, imagen_vieja)
+
+    #     # Y si existe la borro.
+    #     if os.path.exists(ruta_imagen):
+    #         os.remove(ruta_imagen)
+  
+    #precio,cat1,cat2,cat3,cat4,oferta, foto)
+    if acceso_base.modificar_producto(codigo,descripcion,descripcion_red, precio,cat1,cat2,cat3,cat4,oferta, foto):
+        return jsonify({"mensaje": "Producto modificado"}), 200
+    else:
+        return jsonify({"mensaje": "Producto no encontrado"}), 403
+#---------------------------------------------------------------------------
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
